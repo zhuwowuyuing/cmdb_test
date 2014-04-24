@@ -1,0 +1,33 @@
+from django.contrib import admin
+from assets.models import Device, Server, UsingInfo, Finance, ManInfo
+
+# Register your models here.
+class DeviceAdmin(admin.ModelAdmin):
+    list_display = ("asset", "asset_old", "district", "company", "type", "subtype", "manufacturer", "model", "serialno")
+
+class ServerAdmin(admin.ModelAdmin):
+    list_display = ("asset", "size", "cpu", "harddisk", "ram", "os")
+
+
+class UsingInfoAdmin(admin.ModelAdmin):
+    list_display = ("asset", "status", "building", "location", "consignee", "hostname", "dept", "business", "ownername")
+
+class FinanceAdmin(admin.ModelAdmin):
+    list_display = ("asset", "purchase_date", "purchase_cost", "accounting_date", "account_cost", "vendor")
+
+class ManInfoAdmin(admin.ModelAdmin):
+    list_display = ("asset", "administrator")
+
+admin.site.register(Device, DeviceAdmin)
+admin.site.register(Server, ServerAdmin)
+admin.site.register(UsingInfo, UsingInfoAdmin)
+admin.site.register(Finance, FinanceAdmin)
+admin.site.register(ManInfo, ManInfoAdmin)
+
+
+
+
+
+
+
+
