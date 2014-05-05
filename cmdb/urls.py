@@ -5,15 +5,19 @@ from django.contrib import admin
 
 admin.autodiscover()
 
-urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'cmdb.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
-    url(r'^grappelli/', include('grappelli.urls')),
-    url(r'^admin/', include(admin.site.urls)),
-)
+# urlpatterns = patterns('',
+#     # Examples:
+#     # url(r'^$', 'cmdb.views.home', name='home'),
+#     # url(r'^blog/', include('blog.urls')),
+#     url(r'^grappelli/', include('grappelli.urls')),
+#     url(r'^admin/', include(admin.site.urls)),
+# )
 
 urlpatterns = patterns('',
     (r'^grappelli/', include('grappelli.urls')), # grappelli URLS
     (r'^admin/',  include(admin.site.urls)), # admin site
+)
+
+urlpatterns += patterns ('',
+ (r'^assets/', include('assets.urls')),
 )

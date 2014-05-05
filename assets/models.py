@@ -21,7 +21,7 @@ class Device(models.Model):
     serialno    = models.CharField('序列号', max_length=100, blank=True)
 
     def __unicode__(self):
-        return u'%s' % (self.asset)
+        return u'%s %s %s %s %s' % (self.asset, self.type, self.subtype, self.manufacturer, self.model)
 
 class Server(models.Model):
     class Meta:
