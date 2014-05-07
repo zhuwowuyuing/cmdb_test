@@ -26,7 +26,7 @@
       <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="0" selection-start="356" selection-end="356" vertical-scroll-proportion="-3.442623" vertical-offset="0" max-vertical-offset="4425">
+            <state line="14" column="0" selection-start="356" selection-end="356" vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="4425">
               <folding>
                 <element signature="e#28#52#0" expanded="true" />
               </folding>
@@ -34,46 +34,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urls.py" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/assets/urls.py">
+      <file leaf-file-name="list_device.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/assets/list_device.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="22" selection-start="153" selection-end="164" vertical-scroll-proportion="0.17470881" vertical-offset="0" max-vertical-offset="601">
+            <state line="24" column="32" selection-start="671" selection-end="671" vertical-scroll-proportion="-13.416667" vertical-offset="38" max-vertical-offset="660">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cmdb/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="134" column="21" selection-start="3351" selection-end="3351" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2115">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="view_device.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/assets/view_device.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="21" selection-start="192" selection-end="192" vertical-scroll-proportion="-5.0" vertical-offset="0" max-vertical-offset="255">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="base.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="132" column="25" selection-start="4684" selection-end="4684" vertical-scroll-proportion="-18.416666" vertical-offset="1538" max-vertical-offset="2520">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static/BlueNileAdmin/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="125" column="8" selection-start="5343" selection-end="5343" vertical-scroll-proportion="-20.0" vertical-offset="1395" max-vertical-offset="5415">
+            <state line="96" column="53" selection-start="3115" selection-end="3115" vertical-scroll-proportion="0.0779896" vertical-offset="1395" max-vertical-offset="2520">
               <folding />
             </state>
           </provider>
@@ -93,10 +66,7 @@
         <option value="$PROJECT_DIR$/assets/admin.py" />
         <option value="$PROJECT_DIR$/cmdb/urls.py" />
         <option value="$PROJECT_DIR$/urls.py" />
-        <option value="$PROJECT_DIR$/templates/assets/list_finance.html" />
         <option value="$PROJECT_DIR$/templates/assets/list_maninfo.html" />
-        <option value="$PROJECT_DIR$/templates/assets/list_server.html" />
-        <option value="$PROJECT_DIR$/templates/assets/list_usinginfo.html" />
         <option value="$PROJECT_DIR$/templates/assets/list_device.html" />
         <option value="$PROJECT_DIR$/assets/models.py" />
         <option value="$PROJECT_DIR$/assets/urls.py" />
@@ -104,6 +74,9 @@
         <option value="$PROJECT_DIR$/static/BlueNileAdmin/index.html" />
         <option value="$PROJECT_DIR$/cmdb/settings.py" />
         <option value="$PROJECT_DIR$/templates/base.html" />
+        <option value="$PROJECT_DIR$/templates/assets/list_usinginfo.html" />
+        <option value="$PROJECT_DIR$/templates/assets/list_finance.html" />
+        <option value="$PROJECT_DIR$/templates/assets/list_server.html" />
       </list>
     </option>
   </component>
@@ -197,39 +170,21 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
+              <option name="myItemId" value="cmdb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cmdb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cmdb" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cmdb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cmdb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cmdb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cmdb" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cmdb" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -691,44 +646,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/assets/list_server.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="2" selection-start="491" selection-end="491" vertical-scroll-proportion="0.46793762" vertical-offset="0" max-vertical-offset="660">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/assets/list_maninfo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="12" selection-start="513" selection-end="513" vertical-scroll-proportion="0.35008666" vertical-offset="83" max-vertical-offset="660">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/assets/list_finance.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="2" selection-start="488" selection-end="488" vertical-scroll-proportion="0.44194108" vertical-offset="0" max-vertical-offset="645">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/assets/list_usinginfo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="0" selection-start="268" selection-end="514" vertical-scroll-proportion="-8.75" vertical-offset="0" max-vertical-offset="675">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/assets/create_finance.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="577">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/assets/list_device.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="63" selection-start="471" selection-end="476" vertical-scroll-proportion="-9.041667" vertical-offset="38" max-vertical-offset="660">
           <folding />
         </state>
       </provider>
@@ -737,15 +657,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="601">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="0" selection-start="356" selection-end="356" vertical-scroll-proportion="-3.442623" vertical-offset="0" max-vertical-offset="4425">
-          <folding>
-            <element signature="e#28#52#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -786,6 +697,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/cmdb/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="122" column="1" selection-start="3079" selection-end="3079" vertical-scroll-proportion="0.0" vertical-offset="1335" max-vertical-offset="2115">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/BlueNileAdmin/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="213" column="6" selection-start="8233" selection-end="8233" vertical-scroll-proportion="-133.125" vertical-offset="0" max-vertical-offset="4305">
+          <folding>
+            <element signature="tag#div#2;tag#div#0;tag#div#1;tag#div#2;tag#body#0;tag#html#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/assets/view_device.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="21" selection-start="192" selection-end="192" vertical-scroll-proportion="-5.0" vertical-offset="0" max-vertical-offset="255">
@@ -793,30 +720,88 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cmdb/settings.py">
+    <entry file="file://$PROJECT_DIR$/templates/assets/view_finance.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="134" column="21" selection-start="3351" selection-end="3351" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2115">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="601">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/BlueNileAdmin/index.html">
+    <entry file="file://$PROJECT_DIR$/templates/assets/view_usinginfo.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="125" column="8" selection-start="5343" selection-end="5343" vertical-scroll-proportion="-20.0" vertical-offset="1395" max-vertical-offset="5415">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="132" column="25" selection-start="4684" selection-end="4684" vertical-scroll-proportion="-18.416666" vertical-offset="1538" max-vertical-offset="2520">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="577">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="22" selection-start="153" selection-end="164" vertical-scroll-proportion="0.17470881" vertical-offset="0" max-vertical-offset="601">
+        <state line="32" column="0" selection-start="1430" selection-end="1430" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="570">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/assets/view_server.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="577">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/assets/view_maninfo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="601">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="0" selection-start="356" selection-end="356" vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="4425">
+          <folding>
+            <element signature="e#28#52#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/assets/list_server.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="22" selection-start="778" selection-end="778" vertical-scroll-proportion="-15.625" vertical-offset="45" max-vertical-offset="660">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/assets/list_maninfo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="12" selection-start="513" selection-end="513" vertical-scroll-proportion="-8.416667" vertical-offset="83" max-vertical-offset="660">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/assets/list_finance.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="84" selection-start="389" selection-end="389" vertical-scroll-proportion="-9.375" vertical-offset="0" max-vertical-offset="645">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/assets/list_device.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="32" selection-start="671" selection-end="671" vertical-scroll-proportion="-13.416667" vertical-offset="38" max-vertical-offset="660">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/assets/list_usinginfo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="20" selection-start="659" selection-end="659" vertical-scroll-proportion="0.6239168" vertical-offset="0" max-vertical-offset="675">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="96" column="53" selection-start="3115" selection-end="3115" vertical-scroll-proportion="0.0779896" vertical-offset="1395" max-vertical-offset="2520">
           <folding />
         </state>
       </provider>

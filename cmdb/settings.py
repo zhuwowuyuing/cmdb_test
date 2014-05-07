@@ -119,7 +119,7 @@ TEMPLATE_DIRS = (
 )
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, STATIC_URL.replace("/", "")),
 )
 
 # ADMIN_MEDIA_PREFIX = STATIC_URL + "grappelli/"

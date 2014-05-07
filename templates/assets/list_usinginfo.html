@@ -15,8 +15,8 @@
 {% for item in list_items.object_list %}
   <tr>
       <td>  {{item}}</td>
-      <td><a href="{% url "assets.views.view_usinginfo" item.id %}">Show</a> </td>
-      <td><a href="{% url "assets.views.edit_usinginfo" item.id %}">Edit</a></td>
+      <td><a href="{% url "assets.views.view_usinginfo" item.asset %}">Show</a> </td>
+      <td><a href="{% url "assets.views.edit_usinginfo" item.asset %}">Edit</a></td>
   </tr>
 {% endfor %}
 <tr><td colspan="3"> <a href="{% url "assets.views.create_usinginfo" %}">Add New</a></td></tr>
