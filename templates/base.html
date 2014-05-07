@@ -10,7 +10,7 @@
 {#    <title>#}
 {#        {% block title %} {% endblock %}#}
 {#    </title>#}
-{#      <style type="text/css"> #}
+{#      <style type="text/css">#}
 {#        html * { padding:0; margin:0; }#}
 {#        body * { padding:10px 20px; }#}
 {#        body * * { padding:0; }#}
@@ -28,18 +28,18 @@
 {#        #explanation { background:#eee; }#}
 {#        #content { background:#f6f6f6; }#}
 {#        #summary table { border:none; background:transparent; }#}
-{#      </style> #}
+{#      </style>#}
 {#</head>#}
 {#<body>#}
 {##}
 {##}
 {#<div id="summary">#}
-{#{% block heading %}  #}
+{#{% block heading %}#}
 {#{% endblock %}#}
 {#</div>#}
 {##}
 {#<div id="content">#}
-{#{% block content %} #}
+{#{% block content %}#}
 {##}
 {##}
 {#{% endblock %}#}
@@ -151,25 +151,25 @@
         <li ><a href="500.html">500 page</a></li>
         <li ><a href="503.html">503 page</a></li>
     </ul>
-{##}
-{#    <a href="#legal-menu" class="nav-header" data-toggle="collapse"><i class="icon-legal"></i>Legal</a>#}
-{#    <ul id="legal-menu" class="nav nav-list collapse">#}
-{#        <li ><a href="privacy-policy.html">Privacy Policy</a></li>#}
-{#        <li ><a href="terms-and-conditions.html">Terms and Conditions</a></li>#}
-{#    </ul>#}
-{##}
-{#    <a href="help.html" class="nav-header" ><i class="icon-question-sign"></i>Help</a>#}
-{#    <a href="faq.html" class="nav-header" ><i class="icon-comment"></i>Faq</a>#}
+
+    <a href="#legal-menu" class="nav-header" data-toggle="collapse"><i class="icon-legal"></i>Legal</a>
+    <ul id="legal-menu" class="nav nav-list collapse">
+        <li ><a href="privacy-policy.html">Privacy Policy</a></li>
+        <li ><a href="terms-and-conditions.html">Terms and Conditions</a></li>
+    </ul>
+
+    <a href="help.html" class="nav-header" ><i class="icon-question-sign"></i>Help</a>
+    <a href="faq.html" class="nav-header" ><i class="icon-comment"></i>Faq</a>
 
 </div>
 
 <div class="content">
     <div class="header">
-{#        <div class="stats">#}
-{#            <p class="stat"><span class="number">53</span>tickets</p>#}
-{#            <p class="stat"><span class="number">27</span>tasks</p>#}
-{#            <p class="stat"><span class="number">15</span>waiting</p>#}
-{#        </div>#}
+        <div class="stats">
+            <p class="stat"><span class="number">53</span>tickets</p>
+            <p class="stat"><span class="number">27</span>tasks</p>
+            <p class="stat"><span class="number">15</span>waiting</p>
+        </div>
 
         <h1 class="page-title">Dashboard</h1>
     </div>
@@ -194,9 +194,9 @@
             </div>
         </div>
     </div>
-{#        <div id="explanation" align="center">#}
-{#            django-groundwork#}
-{#        </div>#}
+        <div id="explanation" align="center">
+            django-groundwork
+        </div>
     <footer>
         <hr>
 
