@@ -29,7 +29,7 @@ def create_device(request):
 def list_device(request):
   
     list_items = Device.objects.all()
-    paginator = Paginator(list_items ,10)
+    paginator = Paginator(list_items ,15)
 
 
     try:
@@ -84,7 +84,7 @@ def create_server(request):
 def list_server(request):
   
     list_items = Server.objects.all()
-    paginator = Paginator(list_items ,10)
+    paginator = Paginator(list_items ,15)
 
 
     try:
@@ -139,7 +139,7 @@ def create_usinginfo(request):
 def list_usinginfo(request):
   
     list_items = UsingInfo.objects.all()
-    paginator = Paginator(list_items ,10)
+    paginator = Paginator(list_items ,15)
 
 
     try:
@@ -194,7 +194,7 @@ def create_finance(request):
 def list_finance(request):
   
     list_items = Finance.objects.all()
-    paginator = Paginator(list_items ,10)
+    paginator = Paginator(list_items ,15)
 
 
     try:
@@ -249,7 +249,7 @@ def create_maninfo(request):
 def list_maninfo(request):
   
     list_items = ManInfo.objects.all()
-    paginator = Paginator(list_items ,10)
+    paginator = Paginator(list_items ,15)
 
 
     try:
