@@ -77,7 +77,7 @@ DATABASES = {
         'NAME': 'assets',
         'USER': 'assets',
         'PASSWORD': '3Gwap_2009',
-        'HOST': 'localhost',
+        'HOST': '192.168.0.35',
         'PORT': '3306',
     }
 }
