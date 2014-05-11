@@ -46,7 +46,8 @@ def list_device(request):
     c = RequestContext(request,locals())
     return HttpResponse(t.render(c))
 
-
+def search_device(request):
+    return ;
 
 def view_device(request, asset):
     device_instance = Device.objects.get(asset = asset)
