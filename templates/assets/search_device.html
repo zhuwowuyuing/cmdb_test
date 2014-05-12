@@ -1,58 +1,108 @@
 
 {% extends "base.html" %}
 
-{% block title %} <h1> Device </h1><h2> List </h2> {% endblock %}
+{% block title %} <h1> Device </h1><h2> Search </h2> {% endblock %}
 
-{% block heading %}
-<h1> Device</h1>
-<h2> Search Records</h2>
-{% endblock %}
+{#{% block heading %}#}
+{#    <h1> Device</h1>#}
+{#    <h2> Search Records</h2>#}
+{#{% endblock %}#}
+
 {% block content %}
+    <div class="row-fluid">
+        <div class="block">
+            <p class="block-heading">Search Assets</p>
+            <div class="block-body">
+                <form action="" method="get">
+                    <table class="table">
+                        <tr>
+                            <td>{{ searchform.asset.label}}</td><td>{{searchform.asset}}</td>
 
-<div class="well">
-<table class="table">
-<thead>
-<tr>
-    <th>Asset</th>
-    <th>Old Asset</th>
-    <th>District</th>
-    <th>Company</th>
-    <th>Type</th>
-    <th>Subtype</th>
-    <th>Manufacturer</th>
-    <th>Model</th>
-    <th colspan="3">Actions</th>
-</tr>
-{% for item in list_items.object_list %}
-  <tr>
-      <td>  {{item.asset}}</td>
-      <td>  {{item.asset_old}}</td>
-      <td>  {{item.district}}</td>
-      <td>  {{item.company}}</td>
-      <td>  {{item.type}}</td>
-      <td>  {{item.subtype}}</td>
-      <td>  {{item.manufacturer}}</td>
-      <td>  {{item.model}}</td>
-      <td><a href="{% url "assets.views.view_device" item.asset %}">Show</a> </td>
-      <td><a href="{% url "assets.views.edit_device" item.asset %}">Edit</a></td>
-  </tr>
-{% endfor %}
-<tr><td colspan="3"> <a href="{% url "assets.views.create_device" %}">Add New</a></td></tr>
-</table>
-</div>
+                            <td>{{ searchform.asset_old.label }}</td><td>{{searchform.asset_old}}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ searchform.district.label }}</td><td>{{searchform.district}}</td>
+                            <td>{{ searchform.company.label }}</td><td>{{searchform.company}}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ searchform.type.label }}</td><td>{{searchform.type}}</td>
+                            <td>{{ searchform.subtype.label }}</td><td>{{searchform.subtype}}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ searchform.manufacturer.label }}</td><td>{{searchform.manufacturer}}</td>
+                            <td>{{ searchform.model.label }}</td><td>{{searchform.model}}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ searchform.serialno.label }}</td><td>{{searchform.serialno}}</td>
+                            <td></td><td></td>
+                        </tr>
+                        <input type="submit" value="Search"></input>
+                    </table>
 
-<div align="center">
-{% if list_items.has_previous %}
-    <a href="?page={{ list_items.previous_page_number }}">Previous</a>
-{% endif %}
 
-<span class="current">
-    Page {{ list_items.number }} of {{ list_items.paginator.num_pages }}.
-</span>
+                </form>
 
-{% if list_items.has_next %}
-        <a href="?page={{ list_items.next_page_number }}">Next</a>
-{% endif %}
+            </div>
+        </div>
+    </div>
 
-</div>
+    <div class="row-fluid">
+        <div class="block">
+            <p class="block-heading">Assets List</p>
+            <div class="block-body">
+                {% if list_items %}
+                    {#                    <div class="well">#}
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>{{ searchform.asset.label }}</th>
+                            <th>{{ searchform.asset_old.label }}</th>
+                            <th>{{ searchform.district.label }}</th>
+                            <th>{{ searchform.company.label }}</th>
+                            <th>{{ searchform.type.label }}</th>
+                            <th>{{ searchform.subtype.label }}</th>
+                            <th>{{ searchform.manufacturer.label }}</th>
+                            <th>{{ searchform.model.label }}</th>
+                            <th colspan="3">Actions </th>
+                        </tr>
+                        </thead>
+                        {% for item in list_items.object_list %}
+                            <tr>
+                                <td>  {{item.asset}}</td>
+                                <td>  {{item.asset_old}}</td>
+                                <td>  {{item.district}}</td>
+                                <td>  {{item.company}}</td>
+                                <td>  {{item.type}}</td>
+                                <td>  {{item.subtype}}</td>
+                                <td>  {{item.manufacturer}}</td>
+                                <td>  {{item.model}}</td>
+                                <td><a href="{% url "assets.views.view_device" item.asset %}">Show</a> </td>
+                                <td><a href="{% url "assets.views.edit_device" item.asset %}">Edit</a></td>
+                            </tr>
+                        {% endfor %}
+                        <tr><td colspan="3"> <a href="{% url "assets.views.create_device" %}">Add New</a></td></tr>
+                    </table>
+                    </div>
+
+                    <div align="center">
+                        {% if list_items.has_previous %}
+                            <a href="?asset={{ asset }}&asset_old={{ asset_old }}&district={{ district }}&company={{ company }}&type={{ type }}&subtype={{ subtype }}&manufacturer={{ manufacturer }}&model={{ model }}&serialno={{ serialno }}&page={{ list_items.previous_page_number }}">Previous</a>
+                        {% endif %}
+
+                        <span class="current">
+                            Page {{ list_items.number }} of {{ list_items.paginator.num_pages }}.
+                        </span>
+
+                        {% if list_items.has_next %}
+                            <a href="?asset={{ asset }}&asset_old={{ asset_old }}&district={{ district }}&company={{ company }}&type={{ type }}&subtype={{ subtype }}&manufacturer={{ manufacturer }}&model={{ model }}&serialno={{ serialno }}&page={{ list_items.next_page_number }}">Next</a>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    <div align="center">
+                        <strong>No Such Data</strong>
+                    </div>
+                {% endif %}
+        </div>
+    </div>
+
 {% endblock %}

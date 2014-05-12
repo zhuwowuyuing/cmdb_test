@@ -1,4 +1,4 @@
-
+#coding=utf8
 # Create your views here.
 
 from django import forms
@@ -7,6 +7,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template.loader import get_template
 from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
+from django.shortcuts import render
 
 # app specific files
 
@@ -46,8 +47,71 @@ def list_device(request):
     c = RequestContext(request,locals())
     return HttpResponse(t.render(c))
 
+# def search_device(request):
+#     isdisplay = False
+#     if 'asset' in request.GET:
+#         isdisplay = True
+#         search_asset = request.GET.get('asset', '')
+#         list_items = Device.objects.filter(asset__icontains=search_asset)
+#         if not list_items:
+#             nodata = True
+#         paginator = Paginator(list_items ,10)
+#
+#         try:
+#             page = int(request.GET.get('page', '1'))
+#         except ValueError:
+#             page = 1
+#         try:
+#             list_items = paginator.page(page)
+#         except :
+#             list_items = paginator.page(paginator.num_pages)
+#
+#         t = get_template('assets/search_device.html')
+#         c = RequestContext(request,locals())
+#         return HttpResponse(t.render(c))
+#     else:
+#         return render(request, "assets/search_device.html")
 def search_device(request):
-    return ;
+    if request.method == "GET":
+        searchform = DeviceSearchForm(request.GET)
+        if searchform.is_valid():
+            data = searchform.cleaned_data
+            asset = data.get('asset','')
+            asset_old = data.get('asset_old','')
+            district        = data.get('district','')
+            company         = data.get('company','')
+            type            = data.get('type','')
+            subtype         = data.get('subtype','')
+            manufacturer    = data.get('manufacturer','')
+            model           = data.get('model','')
+            serialno    = data.get('serialno','')
+
+            list_items = Device.objects.filter(asset__icontains=asset,
+                                               asset_old__icontains=asset_old,
+                                               district__icontains = district,
+                                               company__icontains = company,
+                                               type__icontains = type,
+                                               subtype__icontains = subtype,
+                                               manufacturer__icontains = manufacturer,
+                                               model__icontains = model,
+                                               serialno__icontains = serialno)
+            paginator = Paginator(list_items ,15)
+
+            try:
+                page = int(request.GET.get('page', '1'))
+            except ValueError:
+                page = 1
+            try:
+                list_items = paginator.page(page)
+            except :
+                list_items = paginator.page(paginator.num_pages)
+
+            t = get_template('assets/search_device.html')
+            c = RequestContext(request,locals())
+            return HttpResponse(t.render(c))
+    else:
+        searchform = DeviceSearchForm()
+    return render(request, "assets/search_device.html", locals())
 
 def view_device(request, asset):
     device_instance = Device.objects.get(asset = asset)
