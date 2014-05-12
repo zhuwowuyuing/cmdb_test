@@ -14,6 +14,9 @@ from django.shortcuts import render
 from models import *
 from forms import *
 
+def index(request):
+    return render(request, "index.html")
+
 
 def create_device(request):
     form = DeviceForm(request.POST or None)

@@ -19,5 +19,7 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns ('',
- url(r'^assets/', include('assets.urls')),
+    url(r'^index.html/$', 'assets.views.index'),
+    url(r'^$', 'assets.views.index'),
+    url(r'^assets/', include('assets.urls')),
 )
