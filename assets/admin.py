@@ -1,5 +1,5 @@
 from django.contrib import admin
-from assets.models import Device, Server, UsingInfo, Finance, ManInfo
+from assets.models import Device, Server, UsingInfo, Finance, ManInfo, Status, Servers
 
 # Register your models here.
 class DeviceAdmin(admin.ModelAdmin):
@@ -32,6 +32,8 @@ admin.site.register(Server, ServerAdmin)
 admin.site.register(UsingInfo, UsingInfoAdmin)
 admin.site.register(Finance, FinanceAdmin)
 admin.site.register(ManInfo, ManInfoAdmin)
+admin.site.register(Status)
+admin.site.register(Servers)
 
 
 

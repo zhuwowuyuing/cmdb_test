@@ -355,3 +355,57 @@ def edit_maninfo(request, id):
     t=get_template('assets/edit_maninfo.html')
     c=RequestContext(request,locals())
     return HttpResponse(t.render(c))
+
+def create_servers(request):
+    form = ServersForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        form = ServersForm()
+
+    t = get_template('assets/create_servers.html')
+    c = RequestContext(request,locals())
+    return HttpResponse(t.render(c))
+
+
+
+def list_servers(request):
+
+    list_items = Servers.objects.all()
+    paginator = Paginator(list_items ,10)
+
+
+    try:
+        page = int(request.GET.get('page', '1'))
+    except ValueError:
+        page = 1
+
+    try:
+        list_items = paginator.page(page)
+    except :
+        list_items = paginator.page(paginator.num_pages)
+
+    t = get_template('assets/list_servers.html')
+    c = RequestContext(request,locals())
+    return HttpResponse(t.render(c))
+
+
+
+def view_servers(request, asset):
+    servers_instance = Servers.objects.get(asset = asset)
+
+    t=get_template('assets/view_servers.html')
+    c=RequestContext(request,locals())
+    return HttpResponse(t.render(c))
+
+def edit_servers(request, asset):
+
+    servers_instance = Servers.objects.get(asset = asset)
+
+    form = ServersForm(request.POST or None, instance = servers_instance)
+
+    if form.is_valid():
+        form.save()
+
+    t=get_template('assets/edit_servers.html')
+    c=RequestContext(request,locals())
+    return HttpResponse(t.render(c))

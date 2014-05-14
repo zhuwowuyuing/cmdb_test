@@ -68,3 +68,11 @@ class ManInfoForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ManInfoForm, self).__init__(*args, **kwargs)
 
+class ServersForm(forms.ModelForm):
+
+    class Meta:
+        model = Servers
+        # exclude = [] # uncomment this line and specify any field to exclude it from the form
+
+    def __init__(self, *args, **kwargs):
+        super(ServersForm, self).__init__(*args, **kwargs)

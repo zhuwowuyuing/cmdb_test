@@ -9,7 +9,6 @@ urlpatterns = patterns('',
     url(r'device/edit/(?P<asset>[^/]+)/$', 'assets.views.edit_device'),
     url(r'device/view/(?P<asset>[^/]+)/$', 'assets.views.view_device'),
     url(r'device/search/$', 'assets.views.search_device'),
-    #url(r'device/search/(?P<asset>[^/]+)/$', 'assets.views.search_device'),
     
     url(r'server/create/$', 'assets.views.create_server'),
     url(r'server/list/$', 'assets.views.list_server'),
@@ -30,5 +29,10 @@ urlpatterns = patterns('',
     url(r'maninfo/list/$', 'assets.views.list_maninfo'),
     url(r'maninfo/edit/(?P<id>[^/]+)/$', 'assets.views.edit_maninfo'),
     url(r'maninfo/view/(?P<id>[^/]+)/$', 'assets.views.view_maninfo'),
+
+    url(r'servers/create/$', 'assets.views.create_servers'),
+    url(r'servers/list/$', 'assets.views.list_servers'),
+    url(r'servers/edit/(?P<asset>[^/]+)/$', 'assets.views.edit_servers'),
+    url(r'servers/view/(?P<asset>[^/]+)/$', 'assets.views.view_servers'),
 
 )
