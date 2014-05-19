@@ -1,11 +1,33 @@
+{##}
+{#{% extends "base.html" %}#}
+{##}
+{#{% block title %} Servers - View {% endblock %}#}
+{##}
+{#{% block heading %} <h1> Servers</h1><h2>View</h2>  {% endblock %}#}
+{#{% block content %} #}
+{#<table>#}
+{#{{ servers_instance }}#}
+{##}
+{#   #}
+{#</table>#}
+{#{% endblock %}#}
+
 
 {% extends "base.html" %}
 
-{% block title %} Servers - View {% endblock %}
+{% block title %} Servers - Edit {% endblock %}
 
-{% block heading %} <h1> Servers</h1><h2>View</h2>  {% endblock %}
-{% block content %} 
-<table>
-{{ servers_instance }}
-</table>
+{% block heading %} <h1> Servers</h1><h2> Edit </h2> {% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="well">
+                <table class="table">
+                    <form action="" method="POST"> {% csrf_token %}
+                        {{form.as_table}}
+                    </form>
+                </table>
+            </div>
+        </div>
+    </div>
 {% endblock %}

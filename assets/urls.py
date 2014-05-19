@@ -1,6 +1,6 @@
 
 from django.conf.urls import patterns, include, url
-
+# from assets.views import ServersDetailView, ServersListlView
 
 urlpatterns = patterns('',
 
@@ -34,5 +34,7 @@ urlpatterns = patterns('',
     url(r'servers/list/$', 'assets.views.list_servers'),
     url(r'servers/edit/(?P<asset>[^/]+)/$', 'assets.views.edit_servers'),
     url(r'servers/view/(?P<asset>[^/]+)/$', 'assets.views.view_servers'),
-
+    url(r'servers/search/$', 'assets.views.search_servers'),
+    # url(r'servers/view/(?P<slug>[^/]+)/$', ServersDetailView.as_view()),
+    # url(r'servers/list/$', ServersListlView.as_view()),
 )

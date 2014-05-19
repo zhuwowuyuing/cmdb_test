@@ -152,3 +152,6 @@ class Servers(models.Model):
 
     def __unicode__(self):
         return u'%s %s %s %s %s' % (self.asset, self.type, self.subtype, self.manufacturer, self.model)
+
+    def getFieldValue(self, filed):
+        return

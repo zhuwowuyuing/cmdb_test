@@ -8,6 +8,8 @@ from django.template.loader import get_template
 from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
+from django.views.generic.detail import DetailView
+from django.views.generic import ListView
 
 # app specific files
 
@@ -371,7 +373,7 @@ def create_servers(request):
 def list_servers(request):
 
     list_items = Servers.objects.all()
-    paginator = Paginator(list_items ,10)
+    paginator = Paginator(list_items ,15)
 
 
     try:
@@ -392,7 +394,7 @@ def list_servers(request):
 
 def view_servers(request, asset):
     servers_instance = Servers.objects.get(asset = asset)
-
+    form = ServersForm(None, instance = servers_instance)
     t=get_template('assets/view_servers.html')
     c=RequestContext(request,locals())
     return HttpResponse(t.render(c))
@@ -409,3 +411,49 @@ def edit_servers(request, asset):
     t=get_template('assets/edit_servers.html')
     c=RequestContext(request,locals())
     return HttpResponse(t.render(c))
+
+def search_servers(request):
+    if request.method == "GET":
+        searchform = ServersSearchForm(request.GET)
+        if searchform.is_valid():
+            data = searchform.cleaned_data
+            asset = data.get('asset','')
+            asset_old = data.get('asset_old','')
+            type = data.get('type','')
+            subtype = data.get('subtype','')
+            manufacturer = data.get('manufacturer','')
+            model = data.get('model','')
+            building = data.get('building','')
+            location = data.get('location','')
+            consignee = data.get('consignee','')
+            hostname = data.get('hostname','')
+            vendor = data.get('vendor','')
+
+            list_items = Servers.objects.filter(asset__icontains = asset,
+                                               asset_old__icontains = asset_old,
+                                               type__icontains = type,
+                                               subtype__icontains = subtype,
+                                               manufacturer__icontains = manufacturer,
+                                               model__icontains = model,
+                                               building__icontains = building,
+                                               location__icontains = location,
+                                               consignee__icontains = consignee,
+                                               hostname__icontains = hostname,
+                                               vendor__icontains = vendor)
+            paginator = Paginator(list_items ,15)
+
+            try:
+                page = int(request.GET.get('page', '1'))
+            except ValueError:
+                page = 1
+            try:
+                list_items = paginator.page(page)
+            except :
+                list_items = paginator.page(paginator.num_pages)
+
+            t = get_template('assets/search_servers.html')
+            c = RequestContext(request,locals())
+            return HttpResponse(t.render(c))
+    else:
+        searchform = ServersSearchForm()
+    return render(request, "assets/search_servers.html", locals())
