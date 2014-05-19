@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block title %} <h1> Device </h1><h2> Search </h2>
+{% endblock %}
+
+{#{% block heading %}#}
+{#    <h1> Device</h1>#}
+{#    <h2> Search Records</h2>#}
+{#{% endblock %}#}
+
+{% block content %}
+    {#    <p><strong>CMDB</strong></p>#}
+    <div class="row-fluid">
+        <div class="block">
+            <div class="block-body">
+                <div class="well">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>型号</th>
+                            <th>数量</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+{#                        {% for item in modelCount %}#}
+{#                            <tr>#}
+{#                                <td>{{forloop.counter}}</td>#}
+{#                                {% for key, value in item.items %}#}
+{#                                    {% if key == 'model' %}#}
+{#                                        <td><a href="/assets/servers/search/?model={{ value }}">{{ value }}</a></td>#}
+{#                                    {% else %}#}
+{#                                        <td>{{ value }}</td>#}
+{#                                    {% endif %}#}
+{#                                {% endfor %}#}
+{#                            </tr>#}
+{#                        {% endfor %}#}
+                        {% for key, value in result.items %}
+                            <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ key }}</td>
+                            <td>
+                                <a href="/assets/servers/search/?model={{ key }}"> {{ value }} </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div>
+
+        </div>
+    </div>
+{% endblock %}

@@ -109,6 +109,7 @@
                         {% if list_items.has_next %}
                             <a href="?asset={{ asset }}&asset_old={{ asset_old }}&type={{ type }}&subtype={{ subtype }}&manufacturer={{ manufacturer }}&model={{ model }}&building={{ building }}&location={{ location }}&consignee={{ consignee }}&hostname={{ hostname }}&vendor={{ vendor }}&page={{ list_items.next_page_number }}">Next</a>
                         {% endif %}
+                        <spn><p>Total:{{ count }}</p></spn>
                     </div>
                 {% else %}
                     <div align="center">

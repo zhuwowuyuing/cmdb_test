@@ -8,8 +8,9 @@ from django.template.loader import get_template
 from django.core.paginator import Paginator
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
-from django.views.generic.detail import DetailView
-from django.views.generic import ListView
+# from django.views.generic.detail import DetailView
+# from django.views.generic import ListView
+from django.db.models import Count
 
 # app specific files
 
@@ -17,7 +18,10 @@ from models import *
 from forms import *
 
 def index(request):
-    return render(request, "index.html")
+    page_title='Dashboard'
+    statusCount=Servers.objects.values('status').annotate(dcount=Count('status'))
+    modelCount=Servers.objects.values('model').annotate(dcount=Count('model')).order_by('model')
+    return render(request, "index.html", locals())
 
 
 def create_device(request):
@@ -359,6 +363,7 @@ def edit_maninfo(request, id):
     return HttpResponse(t.render(c))
 
 def create_servers(request):
+    page_title='Create Server'
     form = ServersForm(request.POST or None)
     if form.is_valid():
         form.save()
@@ -371,7 +376,7 @@ def create_servers(request):
 
 
 def list_servers(request):
-
+    page_title='Servers List'
     list_items = Servers.objects.all()
     paginator = Paginator(list_items ,15)
 
@@ -393,6 +398,7 @@ def list_servers(request):
 
 
 def view_servers(request, asset):
+    page_title='Server View'
     servers_instance = Servers.objects.get(asset = asset)
     form = ServersForm(None, instance = servers_instance)
     t=get_template('assets/view_servers.html')
@@ -400,7 +406,7 @@ def view_servers(request, asset):
     return HttpResponse(t.render(c))
 
 def edit_servers(request, asset):
-
+    page_title='Edit Server'
     servers_instance = Servers.objects.get(asset = asset)
 
     form = ServersForm(request.POST or None, instance = servers_instance)
@@ -413,6 +419,7 @@ def edit_servers(request, asset):
     return HttpResponse(t.render(c))
 
 def search_servers(request):
+    page_title='Search Servers'
     if request.method == "GET":
         searchform = ServersSearchForm(request.GET)
         if searchform.is_valid():
@@ -440,6 +447,7 @@ def search_servers(request):
                                                consignee__icontains = consignee,
                                                hostname__icontains = hostname,
                                                vendor__icontains = vendor)
+            count = list_items.count()
             paginator = Paginator(list_items ,15)
 
             try:
@@ -457,3 +465,25 @@ def search_servers(request):
     else:
         searchform = ServersSearchForm()
     return render(request, "assets/search_servers.html", locals())
+
+def groupbymodel_servers(request):
+    page_title='按型号统计'
+    modelCount=Servers.objects.values('model').annotate(dcount=Count('model')).order_by('model')
+    result={}
+    for item in modelCount:
+        key = item['model']
+        value = item['dcount']
+        result[key]=value
+
+    return render(request, "assets/groupbymodel_servers.html", locals())
+
+def groupbystatus_servers(request):
+    page_title='按使用状态统计'
+    # modelCount=Servers.objects.values('status').annotate(dcount=Count('status')).order_by('status')
+    modelCount={}
+    for item in Status.objects.all():
+        # modelCount[item.status]=[item.servers_set.count(), item.id]
+        modelCount.setdefault(item.status, [  ]).append(item.servers_set.count())
+        modelCount.setdefault(item.status, [  ]).append( item.id)
+
+    return render(request, "assets/groupbystatus_servers.html", locals())

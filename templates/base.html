@@ -115,24 +115,27 @@
     <div class="navbar-inner">
         <ul class="nav pull-right">
 
-            <li><a href="#" class="hidden-phone visible-tablet visible-desktop" role="button">Settings</a></li>
-            <li id="fat-menu" class="dropdown">
-                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="icon-user"></i> Jack Smith
-                    <i class="icon-caret-down"></i>
-                </a>
-
-                <ul class="dropdown-menu">
-                    <li><a tabindex="-1" href="#">My Account</a></li>
-                    <li class="divider"></li>
-                    <li><a tabindex="-1" class="visible-phone" href="#">Settings</a></li>
-                    <li class="divider visible-phone"></li>
-                    <li><a tabindex="-1" href="{{STATIC_URL}}BlueNileAdmin/sign-in.html">Logout</a></li>
-                </ul>
-            </li>
+{#            <li><a href="#" class="hidden-phone visible-tablet visible-desktop" role="button">Settings</a></li>#}
+{#            <li id="fat-menu" class="dropdown">#}
+{#                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">#}
+{#                    <i class="icon-user"></i> Jack Smith#}
+{#                    <i class="icon-caret-down"></i>#}
+{#                </a>#}
+{##}
+{#                <ul class="dropdown-menu">#}
+{#                    <li><a tabindex="-1" href="#">My Account</a></li>#}
+{#                    <li class="divider"></li>#}
+{#                    <li><a tabindex="-1" class="visible-phone" href="#">Settings</a></li>#}
+{#                    <li class="divider visible-phone"></li>#}
+{#                    <li><a tabindex="-1" href="{{STATIC_URL}}BlueNileAdmin/sign-in.html">Logout</a></li>#}
+{#                </ul>#}
+{#            </li>#}
 
         </ul>
-        <a class="brand" href="{{STATIC_URL}}BlueNileAdmin/index.html"><span class="first">Your</span> <span class="second">Company</span></a>
+        <a class="brand" href="/index.html/">
+{#            <span class="first">Your</span> #}
+            <span class="second">CMDB</span>
+        </a>
     </div>
 </div>
 
@@ -147,7 +150,9 @@
 {#        <li ><a href="/assets/usinginfo/list/">UsingInfo</a></li>#}
 {#        <li ><a href="/assets/finance/list/">Finance</a></li>#}
 {#        <li ><a href="/assets/maninfo/list/">ManInfo</a> </li>#}
-        <li><a href="/assets/servers/list/">Servers List</a></li>
+        <li><a href="/assets/servers/groupbystatus_servers/">按使用状态统计</a></li>
+        <li><a href="/assets/servers/groupbymodel_servers/">按型号统计</a></li>
+
     </ul>
 
 {#    <a href="#device-menu" class="nav-header" data-toggle="collapse"><i class="icon-legal"></i>Device Info</a>#}
@@ -168,12 +173,12 @@
 
 <div class="content">
     <div class="header">
-        <h1 class="page-title">Dashboard</h1>
+        <h1 class="page-title">{{ page_title }}</h1>
     </div>
 
     <ul class="breadcrumb">
-        <li><a href="/index.html">Home</a> <span class="divider">/</span></li>
-        <li class="active">Dashboard</li>
+        <li><a href="/index.html/">Home</a> <span class="divider">/</span></li>
+        <li class="active">{{ page_title }}</li>
     </ul>
 
     <div class="container-fluid">
