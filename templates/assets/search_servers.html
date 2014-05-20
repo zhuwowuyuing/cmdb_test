@@ -38,7 +38,10 @@
                         </tr>
                         <tr>
                             <td>{{ searchform.vendor.label }}</td><td>{{searchform.vendor}}</td>
-                            <td></td><td></td>
+                            <td>{{ searchform.status.label }}</td>
+                            <td>
+                                {{ searchform.status }}
+                            </td>
                         </tr>
                         <input class="btn btn-primary" type="submit" value="Search"></input>
                     </table>

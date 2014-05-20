@@ -37,7 +37,7 @@ def create_device(request):
 
 
 def list_device(request):
-  
+
     list_items = Device.objects.all()
     paginator = Paginator(list_items ,15)
 
@@ -156,7 +156,7 @@ def create_server(request):
 
 
 def list_server(request):
-  
+
     list_items = Server.objects.all()
     paginator = Paginator(list_items ,15)
 
@@ -211,7 +211,7 @@ def create_usinginfo(request):
 
 
 def list_usinginfo(request):
-  
+
     list_items = UsingInfo.objects.all()
     paginator = Paginator(list_items ,15)
 
@@ -266,7 +266,7 @@ def create_finance(request):
 
 
 def list_finance(request):
-  
+
     list_items = Finance.objects.all()
     paginator = Paginator(list_items ,15)
 
@@ -321,7 +321,7 @@ def create_maninfo(request):
 
 
 def list_maninfo(request):
-  
+
     list_items = ManInfo.objects.all()
     paginator = Paginator(list_items ,15)
 
@@ -435,18 +435,34 @@ def search_servers(request):
             consignee = data.get('consignee','')
             hostname = data.get('hostname','')
             vendor = data.get('vendor','')
-
-            list_items = Servers.objects.filter(asset__icontains = asset,
-                                               asset_old__icontains = asset_old,
-                                               type__icontains = type,
-                                               subtype__icontains = subtype,
-                                               manufacturer__icontains = manufacturer,
-                                               model__icontains = model,
-                                               building__icontains = building,
-                                               location__icontains = location,
-                                               consignee__icontains = consignee,
-                                               hostname__icontains = hostname,
-                                               vendor__icontains = vendor)
+            status = data.get('status')
+            if status == None:
+                list_items = Servers.objects.filter(asset__icontains = asset,
+                                                    asset_old__icontains = asset_old,
+                                                    type__icontains = type,
+                                                    subtype__icontains = subtype,
+                                                    manufacturer__icontains = manufacturer,
+                                                    model__icontains = model,
+                                                    building__icontains = building,
+                                                    location__icontains = location,
+                                                    consignee__icontains = consignee,
+                                                    hostname__icontains = hostname,
+                                                    vendor__icontains = vendor
+                                                    )
+            else:
+                list_items = Servers.objects.filter(asset__icontains = asset,
+                                                    asset_old__icontains = asset_old,
+                                                    type__icontains = type,
+                                                    subtype__icontains = subtype,
+                                                    manufacturer__icontains = manufacturer,
+                                                    model__icontains = model,
+                                                    building__icontains = building,
+                                                    location__icontains = location,
+                                                    consignee__icontains = consignee,
+                                                    hostname__icontains = hostname,
+                                                    vendor__icontains = vendor,
+                                                    status = status
+                                                    )
             count = list_items.count()
             paginator = Paginator(list_items ,15)
 
@@ -469,12 +485,12 @@ def search_servers(request):
 def groupbymodel_servers(request):
     page_title='按型号统计'
     modelCount=Servers.objects.values('model').annotate(dcount=Count('model')).order_by('model')
-    result={}
+    results={}
     for item in modelCount:
         key = item['model']
         value = item['dcount']
-        result[key]=value
-
+        results[key]=value
+    results=sorted(results.items())
     return render(request, "assets/groupbymodel_servers.html", locals())
 
 def groupbystatus_servers(request):

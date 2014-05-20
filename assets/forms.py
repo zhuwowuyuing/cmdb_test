@@ -1,8 +1,20 @@
 #coding=utf8
 from django import forms
+from django.forms import ModelChoiceField
 from models import *
 
 
+
+# STATUS_CHOICES = ((1, '使用中'),
+#                   (2, '已注销'),
+#                   (3, '库存'),
+#                   (4, '待报废'),
+#                   (5, '已报废'),
+#                   (6, '维修中'),)
+
+STATUS_CHOICES = (('使用中', 1),
+                  ('已注销',2),
+                )
 
 class DeviceForm(forms.ModelForm):
 
@@ -84,7 +96,7 @@ class ServersSearchForm(forms.Form):
     subtype         =forms.CharField(label='子类别', max_length=60, required=False)
     manufacturer    =forms.CharField(label='品牌', max_length=60, required=False)
     model           =forms.CharField(label='型号', max_length=100, required=False)
-    # status          =forms.CharField(label='使用状态', max_length=60, required=False)
+    status = ModelChoiceField(label='使用状态', queryset=Status.objects.all(), required=False)
     building        =forms.CharField(label='机房(所处位置)',max_length=60, required=False)
     location        =forms.CharField(label='机柜',max_length=60, required=False)
     consignee       =forms.CharField(label='托管编号',max_length=60, required=False)
