@@ -378,6 +378,7 @@ def create_servers(request):
 def list_servers(request):
     page_title='Servers List'
     list_items = Servers.objects.all()
+    count = list_items.count()
     paginator = Paginator(list_items ,15)
 
 
@@ -436,7 +437,7 @@ def search_servers(request):
             hostname = data.get('hostname','')
             vendor = data.get('vendor','')
             status = data.get('status')
-            if status == None:
+            if status == None or status == 'None':
                 list_items = Servers.objects.filter(asset__icontains = asset,
                                                     asset_old__icontains = asset_old,
                                                     type__icontains = type,
