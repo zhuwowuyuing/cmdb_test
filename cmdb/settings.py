@@ -76,7 +76,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'assets',
         'USER': 'assets',
-        'PASSWORD': '3Gwap_2009',
+        'PASSWORD': 'assets',
         'HOST': '192.168.0.35',
         'PORT': '3306',
     }
