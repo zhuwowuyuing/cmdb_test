@@ -101,7 +101,7 @@ class Status(models.Model):
         verbose_name = '使用状态'
         verbose_name_plural = verbose_name
 
-    status          = models.CharField('使用状态',max_length=60)
+    status          = models.CharField('使用状态',max_length=60, primary_key=True)
 
     def __unicode__(self):
         return u'%s' % (self.status)
@@ -140,9 +140,9 @@ class Servers(models.Model):
     scrapDate       = models.DateField('报废时间', blank=True)
     changeInfo      = models.TextField('变更信息',max_length=4000, blank=True)
     purchase_date   = models.DateField('采购时间', blank=True)
-    purchase_cost   = models.FloatField('采购价格',max_length=60, blank=True)
+    purchase_cost   = models.FloatField('采购价格',max_length=60)
     accounting_date = models.DateField('入账时间', blank=True)
-    account_cost    = models.FloatField('入账价格',max_length=60, blank=True)
+    account_cost    = models.FloatField('入账价格',max_length=60)
     vendor          = models.CharField('供应商',max_length=200, blank=True)
     vendor_contacts = models.TextField('供应商联系方式',max_length=2000, blank=True)
     accounting_info = models.TextField('入账情况',max_length=2000, blank=True)
