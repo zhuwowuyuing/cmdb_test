@@ -27,19 +27,10 @@
                         {% for key, value in modelCount.items %}
                             <tr>
                                 <td>{{forloop.counter}}</td>
-{#                                {% for key, value in item.items %}#}
-{#                                    {% if key == 'model' %}#}
-{#                                        <td>#}
-{#                                            <a href="/assets/servers/search/?model={{ value }}">{{ value.status }}</a>#}
-{#                                        </td>#}
-{#                                    {% else %}#}
-{#                                        <td>{{ value }}</td>#}
-{#                                    {% endif %}#}
-{#                                {% endfor %}#}
-                                    <td>{{ key }}</td>
-                                    <td>
-                                        <a><a href="/assets/servers/search/?status={{ value.1 }}">{{ value.0 }}</a>
-                                    </td>
+                                <td>{{ key }}</td>
+                                <td>
+                                    <a><a href="/assets/servers/search/?status={{ key }}">{{ value }}</a>
+                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>

@@ -65,6 +65,15 @@ class ServersForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super(ServersForm, self).__init__(*args, **kwargs)
 
+class StatusForm(forms.ModelForm):
+
+	class Meta:
+		model = Status
+		# exclude = [] # uncomment this line and specify any field to exclude it from the form
+
+	def __init__(self, *args, **kwargs):
+		super(StatusForm, self).__init__(*args, **kwargs)
+
 
 class DeviceSearchForm(forms.Form):
 	asset = forms.CharField(label='资产编号', max_length=60, required=False)

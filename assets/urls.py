@@ -37,4 +37,7 @@ urlpatterns = patterns('',
     url(r'servers/search/$', 'assets.views.search_servers'),
     url(r'servers/groupbymodel_servers/$', 'assets.views.groupbymodel_servers'),
     url(r'servers/groupbystatus_servers/$', 'assets.views.groupbystatus_servers'),
+
+    url(r'status/create/$', 'assets.views.create_status'),
+    url(r'status/list/$', 'assets.views.list_status'),
 )

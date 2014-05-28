@@ -500,7 +500,41 @@ def groupbystatus_servers(request):
     modelCount={}
     for item in Status.objects.all():
         # modelCount[item.status]=[item.servers_set.count(), item.id]
-        modelCount.setdefault(item.status, [  ]).append(item.servers_set.count())
-        modelCount.setdefault(item.status, [  ]).append( item.id)
+        # modelCount.setdefault(item.status, [  ]).append(item.servers_set.count())
+        # modelCount.setdefault(item.status, [  ]).append( item.status)
+        modelCount[item.status]=item.servers_set.count()
 
     return render(request, "assets/groupbystatus_servers.html", locals())
+
+def create_status(request):
+    page_title='添加使用状态'
+    form = StatusForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        form = StatusForm()
+
+    t = get_template('assets/create_status.html')
+    c = RequestContext(request,locals())
+    return HttpResponse(t.render(c))
+
+
+
+def list_status(request):
+    page_title='使用状态列表'
+    list_items = Status.objects.all()
+    paginator = Paginator(list_items ,15)
+
+
+    try:
+        page = int(request.GET.get('page', '1'))
+    except ValueError:
+        page = 1
+
+    try:
+        list_items = paginator.page(page)
+    except :
+        list_items = paginator.page(paginator.num_pages)
+
+    t = get_template('assets/list_status.html')
+    c = RequestContext(request,locals())
+    return HttpResponse(t.render(c))
