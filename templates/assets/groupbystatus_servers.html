@@ -29,7 +29,8 @@
                                 <td>{{forloop.counter}}</td>
                                 <td>{{ key }}</td>
                                 <td>
-                                    <a><a href="/assets/servers/search/?status={{ key }}">{{ value }}</a>
+                                    {% if value != 0 %}<a href="/assets/servers/search/?status={{ key }}"/> {% endif %}
+                                    {{ value }}
                                 </td>
                             </tr>
                         {% endfor %}

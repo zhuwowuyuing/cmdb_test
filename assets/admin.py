@@ -27,11 +27,11 @@ class ManInfoAdmin(admin.ModelAdmin):
     list_filter = ('asset',)
     search_fields = ('asset',)
 
-admin.site.register(Device, DeviceAdmin)
-admin.site.register(Server, ServerAdmin)
-admin.site.register(UsingInfo, UsingInfoAdmin)
-admin.site.register(Finance, FinanceAdmin)
-admin.site.register(ManInfo, ManInfoAdmin)
+# admin.site.register(Device, DeviceAdmin)
+# admin.site.register(Server, ServerAdmin)
+# admin.site.register(UsingInfo, UsingInfoAdmin)
+# admin.site.register(Finance, FinanceAdmin)
+# admin.site.register(ManInfo, ManInfoAdmin)
 admin.site.register(Status)
 admin.site.register(Servers)
 
