@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'assets',
     'django-groundwork',
+    'south',
 )
 
 MIDDLEWARE_CLASSES = (
