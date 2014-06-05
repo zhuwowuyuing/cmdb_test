@@ -436,6 +436,11 @@ def edit_servers(request, asset):
     c=RequestContext(request,locals())
     return HttpResponse(t.render(c))
 
+def delete_servers(request, asset):
+    Servers.objects.get(asset = asset).delete()
+    searchform = ServersSearchForm()
+    return render(request, "assets/search_servers.html", locals())
+
 def search_servers(request):
     page_title='搜索服务器'
     if request.method == "GET":
@@ -500,6 +505,38 @@ def search_servers(request):
         searchform = ServersSearchForm()
     return render(request, "assets/search_servers.html", locals())
 
+def statistic_servers(request):
+    page_title='概述报表'
+    modelCount=Servers.objects.values('model').annotate(dcount=Count('model')).order_by('model')
+    model_statistic={}
+    for item in modelCount:
+        key = item['model']
+        value = item['dcount']
+        model_statistic[key]=value
+    model_statistic=sorted(model_statistic.items())
+
+    status_statistic={}
+    for item in Status.objects.all():
+        status_statistic[item.status]=item.servers_set.count()
+
+    building_statistic={}
+    buildingCnt=Servers.objects.values('building').annotate(dcount=Count('building')).order_by('building')
+    for item in buildingCnt:
+        key = item['building']
+        value = item['dcount']
+        building_statistic[key]=value
+    building_statistic=sorted(building_statistic.items())
+
+    location_statistic={}
+    locationCnt=Servers.objects.values('location').annotate(dcount=Count('location')).order_by('location')
+    for item in locationCnt:
+        key = item['location']
+        value = item['dcount']
+        location_statistic[key]=value
+    location_statistic=sorted(location_statistic.items())
+
+    return render(request, "assets/statistic_servers.html", locals())
+
 def groupbymodel_servers(request):
     page_title='按型号统计'
     modelCount=Servers.objects.values('model').annotate(dcount=Count('model')).order_by('model')
@@ -514,9 +551,9 @@ def groupbymodel_servers(request):
 def groupbystatus_servers(request):
     page_title='按使用状态统计'
     # modelCount=Servers.objects.values('status').annotate(dcount=Count('status')).order_by('status')
-    modelCount={}
+    status_statistic={}
     for item in Status.objects.all():
-        modelCount[item.status]=item.servers_set.count()
+        status_statistic[item.status]=item.servers_set.count()
 
     return render(request, "assets/groupbystatus_servers.html", locals())
 

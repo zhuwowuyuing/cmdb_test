@@ -24,18 +24,6 @@
                         </tr>
                         </thead>
                         <tbody>
-{#                        {% for item in modelCount %}#}
-{#                            <tr>#}
-{#                                <td>{{forloop.counter}}</td>#}
-{#                                {% for key, value in item.items %}#}
-{#                                    {% if key == 'model' %}#}
-{#                                        <td><a href="/assets/servers/search/?model={{ value }}">{{ value }}</a></td>#}
-{#                                    {% else %}#}
-{#                                        <td>{{ value }}</td>#}
-{#                                    {% endif %}#}
-{#                                {% endfor %}#}
-{#                            </tr>#}
-{#                        {% endfor %}#}
                         {% for key, value in results %}
                             <tr>
                             <td>{{ forloop.counter }}</td>
