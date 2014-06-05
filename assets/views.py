@@ -11,6 +11,8 @@ from django.shortcuts import render
 # from django.views.generic.detail import DetailView
 # from django.views.generic import ListView
 from django.db.models import Count
+from datetime import datetime
+import copy
 
 # app specific files
 
@@ -399,9 +401,17 @@ def list_servers(request):
 
 
 def view_servers(request, asset):
-    page_title='查看服务器'
+    page_title='服务器详情'
     servers_instance = Servers.objects.get(asset = asset)
     form = ServersForm(None, instance = servers_instance)
+    # form.fields['asset'].widget.attrs['readonly'] = True
+    for field in servers_instance._meta.get_all_field_names():
+        if field != 'status':
+            form.fields[field].widget.attrs['readonly'] = True
+        else:
+            form.fields[field].widget.attrs['disabled'] = True
+
+    list_log = ModLog.objects.filter(asset = asset, typename=str(type(servers_instance))).order_by('-mtime')
     t=get_template('assets/view_servers.html')
     c=RequestContext(request,locals())
     return HttpResponse(t.render(c))
@@ -410,9 +420,16 @@ def edit_servers(request, asset):
     page_title='编辑服务器信息'
     servers_instance = Servers.objects.get(asset = asset)
 
+    old_instance = copy.deepcopy(servers_instance)
     form = ServersForm(request.POST or None, instance = servers_instance)
 
     if form.is_valid():
+        if form.has_changed():
+            for filed in form.changed_data:
+                log = ModLog(typename=str(type(servers_instance)),asset=servers_instance.asset, mtime= datetime.now(), field=servers_instance._meta.get_field(filed).verbose_name,
+                         oldvalue=old_instance.__dict__[filed], newvalue=form.data.get(filed,''))
+                log.save()
+
         form.save()
 
     t=get_template('assets/edit_servers.html')
@@ -499,9 +516,6 @@ def groupbystatus_servers(request):
     # modelCount=Servers.objects.values('status').annotate(dcount=Count('status')).order_by('status')
     modelCount={}
     for item in Status.objects.all():
-        # modelCount[item.status]=[item.servers_set.count(), item.id]
-        # modelCount.setdefault(item.status, [  ]).append(item.servers_set.count())
-        # modelCount.setdefault(item.status, [  ]).append( item.status)
         modelCount[item.status]=item.servers_set.count()
 
     return render(request, "assets/groupbystatus_servers.html", locals())
@@ -537,4 +551,21 @@ def list_status(request):
 
     t = get_template('assets/list_status.html')
     c = RequestContext(request,locals())
+    return HttpResponse(t.render(c))
+
+def edit_status(request, status):
+    page_title='编辑使用状态'
+    status_instance = Status.objects.get(status = status)
+
+    form = StatusForm(request.POST or None, instance = status_instance)
+
+    if form.is_valid():
+        if form.data.get('exclusive', False) != status_instance.exclusive:
+            log = ModLog(asset=status_instance.status, mtime= datetime.now(), field='exclusive',
+                         oldvalue=status_instance.exclusive, newvalue=str(form.data.get('exclusive', False)))
+            log.save()
+        form.save()
+
+    t=get_template('assets/edit_status.html')
+    c=RequestContext(request,locals())
     return HttpResponse(t.render(c))

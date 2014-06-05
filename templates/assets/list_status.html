@@ -15,10 +15,16 @@
         <div class="block-body">
             <table class="table">
                 <thead>
-                <tr><th>使用状态</th></tr>
+                <tr>
+                    <th>使用状态</th>>
+                    <th>Exclusive</th>>
+                    <th colspan="3">Actions </th>
+                </tr
                 {% for item in list_items.object_list %}
                     <tr>
-                        <td>  {{item}} </td>
+                        <td>  {{item.status}} </td>
+                        <td>  {{item.exclusive}} </td>
+                        <td><a href="{% url "assets.views.edit_status" item.status %}">Edit</a></td>
                     </tr>
                 {% endfor %}
                 <tr><td colspan="3"> <a href="{% url "assets.views.create_status" %}">Add New</a></td></tr>

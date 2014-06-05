@@ -51,7 +51,7 @@ class ManInfoForm(forms.ModelForm):
 
 	class Meta:
 		model = ManInfo
-		# exclude = [] # uncomment this line and specify any field to exclude it from the form
+		exclude = [] # uncomment this line and specify any field to exclude it from the form
 
 	def __init__(self, *args, **kwargs):
 		super(ManInfoForm, self).__init__(*args, **kwargs)

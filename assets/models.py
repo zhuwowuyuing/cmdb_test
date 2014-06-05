@@ -102,6 +102,7 @@ class Status(models.Model):
         verbose_name_plural = verbose_name
 
     status          = models.CharField('使用状态',max_length=60, primary_key=True)
+    exclusive       = models.BooleanField('exclusive', default=False)
 
     def __unicode__(self):
         return u'%s' % (self.status)
@@ -152,3 +153,18 @@ class Servers(models.Model):
 
     def __unicode__(self):
         return u'%s %s %s %s %s' % (self.asset, self.type, self.subtype, self.manufacturer, self.model)
+
+class ModLog(models.Model):
+    class Meta:
+        verbose_name = '修改历史'
+        verbose_name_plural = verbose_name
+        ordering = ['asset']
+    typename        = models.CharField('表名', max_length=60)
+    asset           = models.CharField('id', max_length=60)
+    mtime           = models.DateTimeField('修改时间')
+    field           = models.CharField('字段名称', max_length=100)
+    oldvalue        = models.CharField('旧值', max_length=500, blank = True)
+    newvalue        = models.CharField('新值', max_length=500, blank = True)
+
+    def __unicode__(self):
+        return u'%s %s %s %s %s' % (self.asset, self.mtime, self.field, self.oldvalue, self.newvalue)
