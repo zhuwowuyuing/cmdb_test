@@ -422,12 +422,14 @@ def edit_servers(request, asset):
 
     old_instance = copy.deepcopy(servers_instance)
     form = ServersForm(request.POST or None, instance = servers_instance)
+    list_log = ModLog.objects.filter(asset = asset, typename=str(type(servers_instance))).order_by('-mtime')
 
     if form.is_valid():
         if form.has_changed():
             for filed in form.changed_data:
-                log = ModLog(typename=str(type(servers_instance)),asset=servers_instance.asset, mtime= datetime.now(), field=servers_instance._meta.get_field(filed).verbose_name,
-                         oldvalue=old_instance.__dict__[filed], newvalue=form.data.get(filed,''))
+                log = ModLog(typename=str(type(servers_instance)),asset=servers_instance.asset, mtime= datetime.now(),
+                             field=servers_instance._meta.get_field(filed).verbose_name,
+                             oldvalue=old_instance.__dict__[filed], newvalue=form.data.get(filed,''))
                 log.save()
 
         form.save()
