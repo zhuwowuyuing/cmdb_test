@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-
+from django.contrib.auth.views import login, logout
 from django.contrib import admin
 
 
@@ -20,6 +20,10 @@ urlpatterns = patterns('',
 
 urlpatterns += patterns ('',
     url(r'^index.html/$', 'assets.views.index'),
-    url(r'^$', 'assets.views.index'),
+    url(r'^index/$', 'assets.views.index'),
     url(r'^assets/', include('assets.urls')),
+    url(r'^$', 'assets.views.login'),
+    url(r'^login/$', 'assets.views.login'),
+    url(r'^logout/$', 'assets.views.logout'),
+    url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
 )

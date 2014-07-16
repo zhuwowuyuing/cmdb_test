@@ -19,6 +19,45 @@ import copy
 from models import *
 from forms import *
 
+from django.shortcuts import render_to_response,render,get_object_or_404
+from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.models import User
+from django.contrib import auth
+from django.contrib import messages
+from django.template.context import RequestContext
+
+from django.forms.formsets import formset_factory
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+
+from django.contrib.auth.decorators import login_required
+
+from .forms import LoginForm
+
+def login(request):
+    if request.method == 'GET':
+        form = LoginForm()
+        return render_to_response('login.html', RequestContext(request, {'form': form,}))
+    else:
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = request.POST.get('username', '')
+            password = request.POST.get('password', '')
+            user = auth.authenticate(username=username, password=password)
+            if user is not None and user.is_active:
+                auth.login(request, user)
+                return render_to_response('index.html', RequestContext(request,{'username':username}))
+            else:
+                return render_to_response('login.html', RequestContext(request, {'form': form,'password_is_wrong':True}))
+        else:
+            return render_to_response('login.html', RequestContext(request, {'form': form,}))
+
+@login_required
+def logout(request):
+    auth.logout(request)
+    return HttpResponseRedirect("/login/")
+
+
+@login_required
 def index(request):
     page_title='Dashboard'
     statusCount=Servers.objects.values('status').annotate(dcount=Count('status'))
@@ -26,344 +65,7 @@ def index(request):
     return render(request, "index.html", locals())
 
 
-# def create_device(request):
-#     form = DeviceForm(request.POST or None)
-#     if form.is_valid():
-#         form.save()
-#         form = DeviceForm()
-#
-#     t = get_template('assets/create_device.html')
-#     c = RequestContext(request,locals())
-#     return HttpResponse(t.render(c))
-#
-#
-#
-# def list_device(request):
-#
-#     list_items = Device.objects.all()
-#     paginator = Paginator(list_items ,15)
-#
-#
-#     try:
-#         page = int(request.GET.get('page', '1'))
-#     except ValueError:
-#         page = 1
-#
-#     try:
-#         list_items = paginator.page(page)
-#     except :
-#         list_items = paginator.page(paginator.num_pages)
-#
-#     t = get_template('assets/list_device.html')
-#     c = RequestContext(request,locals())
-#     return HttpResponse(t.render(c))
-#
-# # def search_device(request):
-# #     isdisplay = False
-# #     if 'asset' in request.GET:
-# #         isdisplay = True
-# #         search_asset = request.GET.get('asset', '')
-# #         list_items = Device.objects.filter(asset__icontains=search_asset)
-# #         if not list_items:
-# #             nodata = True
-# #         paginator = Paginator(list_items ,10)
-# #
-# #         try:
-# #             page = int(request.GET.get('page', '1'))
-# #         except ValueError:
-# #             page = 1
-# #         try:
-# #             list_items = paginator.page(page)
-# #         except :
-# #             list_items = paginator.page(paginator.num_pages)
-# #
-# #         t = get_template('assets/search_device.html')
-# #         c = RequestContext(request,locals())
-# #         return HttpResponse(t.render(c))
-# #     else:
-# #         return render(request, "assets/search_device.html")
-# def search_device(request):
-#     if request.method == "GET":
-#         searchform = DeviceSearchForm(request.GET)
-#         if searchform.is_valid():
-#             data = searchform.cleaned_data
-#             asset = data.get('asset','')
-#             asset_old = data.get('asset_old','')
-#             district        = data.get('district','')
-#             company         = data.get('company','')
-#             type            = data.get('type','')
-#             subtype         = data.get('subtype','')
-#             manufacturer    = data.get('manufacturer','')
-#             model           = data.get('model','')
-#             serialno    = data.get('serialno','')
-#
-#             list_items = Device.objects.filter(asset__icontains=asset,
-#                                                asset_old__icontains=asset_old,
-#                                                district__icontains = district,
-#                                                company__icontains = company,
-#                                                type__icontains = type,
-#                                                subtype__icontains = subtype,
-#                                                manufacturer__icontains = manufacturer,
-#                                                model__icontains = model,
-#                                                serialno__icontains = serialno)
-#             paginator = Paginator(list_items ,15)
-#
-#             try:
-#                 page = int(request.GET.get('page', '1'))
-#             except ValueError:
-#                 page = 1
-#             try:
-#                 list_items = paginator.page(page)
-#             except :
-#                 list_items = paginator.page(paginator.num_pages)
-#
-#             t = get_template('assets/search_device.html')
-#             c = RequestContext(request,locals())
-#             return HttpResponse(t.render(c))
-#     else:
-#         searchform = DeviceSearchForm()
-#     return render(request, "assets/search_device.html", locals())
-#
-# def view_device(request, asset):
-#     device_instance = Device.objects.get(asset = asset)
-#
-#     t=get_template('assets/view_device.html')
-#     c=RequestContext(request,locals())
-#     return HttpResponse(t.render(c))
-#
-# def edit_device(request, asset):
-#
-#     device_instance = Device.objects.get(asset = asset)
-#
-#     form = DeviceForm(request.POST or None, instance = device_instance)
-#
-#     if form.is_valid():
-#         form.save()
-#
-#     t=get_template('assets/edit_device.html')
-#     c=RequestContext(request,locals())
-#     return HttpResponse(t.render(c))
-#
-#
-# def create_server(request):
-#     form = ServerForm(request.POST or None)
-#     if form.is_valid():
-#         form.save()
-#         form = ServerForm()
-#
-#     t = get_template('assets/create_server.html')
-#     c = RequestContext(request,locals())
-#     return HttpResponse(t.render(c))
-#
-#
-#
-# def list_server(request):
-#
-#     list_items = Server.objects.all()
-#     paginator = Paginator(list_items ,15)
-#
-#
-#     try:
-#         page = int(request.GET.get('page', '1'))
-#     except ValueError:
-#         page = 1
-#
-#     try:
-#         list_items = paginator.page(page)
-#     except :
-#         list_items = paginator.page(paginator.num_pages)
-#
-#     t = get_template('assets/list_server.html')
-#     c = RequestContext(request,locals())
-#     return HttpResponse(t.render(c))
-#
-#
-#
-# def view_server(request, asset):
-#     server_instance = Server.objects.get(asset = asset)
-#
-#     t=get_template('assets/view_server.html')
-#     c=RequestContext(request,locals())
-#     return HttpResponse(t.render(c))
-#
-# def edit_server(request, asset):
-#
-#     server_instance = Server.objects.get(asset=asset)
-#
-#     form = ServerForm(request.POST or None, instance = server_instance)
-#
-#     if form.is_valid():
-#         form.save()
-#
-#     t=get_template('assets/edit_server.html')
-#     c=RequestContext(request,locals())
-#     return HttpResponse(t.render(c))
-#
-#
-# def create_usinginfo(request):
-#     form = UsingInfoForm(request.POST or None)
-#     if form.is_valid():
-#         form.save()
-#         form = UsingInfoForm()
-#
-#     t = get_template('assets/create_usinginfo.html')
-#     c = RequestContext(request,locals())
-#     return HttpResponse(t.render(c))
-#
-#
-#
-# def list_usinginfo(request):
-#
-#     list_items = UsingInfo.objects.all()
-#     paginator = Paginator(list_items ,15)
-#
-#
-#     try:
-#         page = int(request.GET.get('page', '1'))
-#     except ValueError:
-#         page = 1
-#
-#     try:
-#         list_items = paginator.page(page)
-#     except :
-#         list_items = paginator.page(paginator.num_pages)
-#
-#     t = get_template('assets/list_usinginfo.html')
-#     c = RequestContext(request,locals())
-#     return HttpResponse(t.render(c))
-#
-#
-#
-# def view_usinginfo(request, asset):
-#     usinginfo_instance = UsingInfo.objects.get(asset = asset)
-#
-#     t=get_template('assets/view_usinginfo.html')
-#     c=RequestContext(request,locals())
-#     return HttpResponse(t.render(c))
-#
-# def edit_usinginfo(request, asset):
-#
-#     usinginfo_instance = UsingInfo.objects.get(asset = asset)
-#
-#     form = UsingInfoForm(request.POST or None, instance = usinginfo_instance)
-#
-#     if form.is_valid():
-#         form.save()
-#
-#     t=get_template('assets/edit_usinginfo.html')
-#     c=RequestContext(request,locals())
-#     return HttpResponse(t.render(c))
-#
-#
-# def create_finance(request):
-#     form = FinanceForm(request.POST or None)
-#     if form.is_valid():
-#         form.save()
-#         form = FinanceForm()
-#
-#     t = get_template('assets/create_finance.html')
-#     c = RequestContext(request,locals())
-#     return HttpResponse(t.render(c))
-#
-#
-#
-# def list_finance(request):
-#
-#     list_items = Finance.objects.all()
-#     paginator = Paginator(list_items ,15)
-#
-#
-#     try:
-#         page = int(request.GET.get('page', '1'))
-#     except ValueError:
-#         page = 1
-#
-#     try:
-#         list_items = paginator.page(page)
-#     except :
-#         list_items = paginator.page(paginator.num_pages)
-#
-#     t = get_template('assets/list_finance.html')
-#     c = RequestContext(request,locals())
-#     return HttpResponse(t.render(c))
-#
-#
-#
-# def view_finance(request, asset):
-#     finance_instance = Finance.objects.get(asset = asset)
-#
-#     t=get_template('assets/view_finance.html')
-#     c=RequestContext(request,locals())
-#     return HttpResponse(t.render(c))
-#
-# def edit_finance(request, asset):
-#
-#     finance_instance = Finance.objects.get(asset = asset)
-#
-#     form = FinanceForm(request.POST or None, instance = finance_instance)
-#
-#     if form.is_valid():
-#         form.save()
-#
-#     t=get_template('assets/edit_finance.html')
-#     c=RequestContext(request,locals())
-#     return HttpResponse(t.render(c))
-#
-#
-# def create_maninfo(request):
-#     form = ManInfoForm(request.POST or None)
-#     if form.is_valid():
-#         form.save()
-#         form = ManInfoForm()
-#
-#     t = get_template('assets/create_maninfo.html')
-#     c = RequestContext(request,locals())
-#     return HttpResponse(t.render(c))
-#
-#
-#
-# def list_maninfo(request):
-#
-#     list_items = ManInfo.objects.all()
-#     paginator = Paginator(list_items ,15)
-#
-#
-#     try:
-#         page = int(request.GET.get('page', '1'))
-#     except ValueError:
-#         page = 1
-#
-#     try:
-#         list_items = paginator.page(page)
-#     except :
-#         list_items = paginator.page(paginator.num_pages)
-#
-#     t = get_template('assets/list_maninfo.html')
-#     c = RequestContext(request,locals())
-#     return HttpResponse(t.render(c))
-#
-#
-#
-# def view_maninfo(request, id):
-#     maninfo_instance = ManInfo.objects.get(id = id)
-#
-#     t=get_template('assets/view_maninfo.html')
-#     c=RequestContext(request,locals())
-#     return HttpResponse(t.render(c))
-#
-# def edit_maninfo(request, id):
-#
-#     maninfo_instance = ManInfo.objects.get(id=id)
-#
-#     form = ManInfoForm(request.POST or None, instance = maninfo_instance)
-#
-#     if form.is_valid():
-#         form.save()
-#
-#     t=get_template('assets/edit_maninfo.html')
-#     c=RequestContext(request,locals())
-#     return HttpResponse(t.render(c))
-
+@login_required
 def create_servers(request):
     page_title='新增服务器'
     form = ServersForm(request.POST or None)
@@ -399,7 +101,6 @@ def list_servers(request):
     return HttpResponse(t.render(c))
 
 
-
 def view_servers(request, asset):
     page_title='服务器详情'
     servers_instance = Servers.objects.get(asset = asset)
@@ -416,6 +117,7 @@ def view_servers(request, asset):
     c=RequestContext(request,locals())
     return HttpResponse(t.render(c))
 
+@login_required
 def edit_servers(request, asset):
     page_title='编辑服务器信息'
     servers_instance = Servers.objects.get(asset = asset)
@@ -438,10 +140,12 @@ def edit_servers(request, asset):
     c=RequestContext(request,locals())
     return HttpResponse(t.render(c))
 
+@login_required
 def delete_servers(request, asset):
     Servers.objects.get(asset = asset).delete()
     searchform = ServersSearchForm()
     return render(request, "assets/search_servers.html", locals())
+
 
 def search_servers(request):
     page_title='搜索服务器'
@@ -507,6 +211,7 @@ def search_servers(request):
         searchform = ServersSearchForm()
     return render(request, "assets/search_servers.html", locals())
 
+
 def statistic_servers(request):
     page_title='概述报表'
     modelCount=Servers.objects.values('model').annotate(dcount=Count('model')).order_by('model')
@@ -559,6 +264,7 @@ def groupbystatus_servers(request):
 
     return render(request, "assets/groupbystatus_servers.html", locals())
 
+@login_required
 def create_status(request):
     page_title='添加使用状态'
     form = StatusForm(request.POST or None)
@@ -569,7 +275,6 @@ def create_status(request):
     t = get_template('assets/create_status.html')
     c = RequestContext(request,locals())
     return HttpResponse(t.render(c))
-
 
 
 def list_status(request):
@@ -592,6 +297,7 @@ def list_status(request):
     c = RequestContext(request,locals())
     return HttpResponse(t.render(c))
 
+@login_required
 def edit_status(request, status):
     page_title='编辑使用状态'
     status_instance = Status.objects.get(status = status)
@@ -608,3 +314,5 @@ def edit_status(request, status):
     t=get_template('assets/edit_status.html')
     c=RequestContext(request,locals())
     return HttpResponse(t.render(c))
+
+
