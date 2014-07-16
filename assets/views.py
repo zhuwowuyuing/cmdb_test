@@ -144,7 +144,8 @@ def edit_servers(request, asset):
 def delete_servers(request, asset):
     Servers.objects.get(asset = asset).delete()
     searchform = ServersSearchForm()
-    return render(request, "assets/search_servers.html", locals())
+    return HttpResponseRedirect("/assets/servers/search/",locals())
+    # return render(request, "assets/search_servers.html", locals())
 
 
 def search_servers(request):

@@ -117,13 +117,15 @@
 
 {#            <li><a href="#" class="hidden-phone visible-tablet visible-desktop" role="button">Settings</a></li>#}
             <li id="fat-menu" class="dropdown">
+                {% if user.is_authenticated %}
                 <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="icon-user"></i>
-                    {% if user.is_authenticated %}
+{#                    {% if user.is_authenticated %}#}
                     {{ user.username }}
-                    {% endif %}
+{#                    {% endif %}#}
                     <i class="icon-caret-down"></i>
                 </a>
+                 {% endif %}
 
                 <ul class="dropdown-menu">
 {#                    <li><a tabindex="-1" href="#">My Account</a></li>#}
