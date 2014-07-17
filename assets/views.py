@@ -96,6 +96,10 @@ def create_servers(request):
     if form.is_valid():
         form.save()
         asset= form.data.get("asset")
+        log = ModLog(typename=str(type(servers_instance)),asset=servers_instance.asset, mtime= datetime.now(),
+                             field=servers_instance._meta.get_field("asset").verbose_name,
+                             oldvalue=old_instance.__dict__[filed], newvalue=form.data.get(filed,''), moduser=request.user)
+        log.save()
         url = "/assets/servers/edit/%s"%(asset)
         return HttpResponseRedirect(url)
 
@@ -160,7 +164,7 @@ def edit_servers(request, asset):
             for filed in form.changed_data:
                 log = ModLog(typename=str(type(servers_instance)),asset=servers_instance.asset, mtime= datetime.now(),
                              field=servers_instance._meta.get_field(filed).verbose_name,
-                             oldvalue=old_instance.__dict__[filed], newvalue=form.data.get(filed,''))
+                             oldvalue=old_instance.__dict__[filed], newvalue=form.data.get(filed,''), moduser=request.user)
                 log.save()
 
         form.save()
@@ -345,4 +349,56 @@ def edit_status(request, status):
     c=RequestContext(request,locals())
     return HttpResponse(t.render(c))
 
+
+def list_modlog(request):
+    page_title='修改历史'
+    if request.method == "GET":
+        modlogform = ModLogSearchForm(request.GET)
+
+        if modlogform.is_valid():
+            data = modlogform.cleaned_data
+            typename = data.get('typename','')
+            asset = data.get('asset','')
+            moduser = data.get('moduser','')
+            field = data.get('field','')
+            comment = data.get('comment','')
+            beforemtime = data.get('beforemtime', "2014-09-30 00:00:00")
+            aftermtime = data.get('aftermtime', 'None')
+
+            if aftermtime ==  None or aftermtime == 'None':
+                list_items = ModLog.objects.filter(typename__icontains = typename,
+                                                    asset__icontains = asset,
+                                                    moduser__icontains = moduser,
+                                                    field__icontains = field,
+                                                    comment__icontains = comment,
+                                                    # mtime__lte = beforemtime
+                                                    )
+            else:
+                list_items = ModLog.objects.filter(typename__icontains = typename,
+                                                    asset__icontains = asset,
+                                                    moduser__icontains = moduser,
+                                                    field__icontains = field,
+                                                    comment__icontains = comment,
+                                                    mtime__range=(aftermtime, beforemtime)
+                                                    # mtime__lte = beforemtime,
+                                                    # mtime__gte = aftermtime
+                                                    )
+            count = list_items.count()
+            paginator = Paginator(list_items ,15)
+
+            try:
+                page = int(request.GET.get('page', '1'))
+            except ValueError:
+                page = 1
+            try:
+                list_items = paginator.page(page)
+            except :
+                list_items = paginator.page(paginator.num_pages)
+
+            t = get_template('assets/list_modlog.html')
+            c = RequestContext(request,locals())
+            return HttpResponse(t.render(c))
+    else:
+        modlogform = ModLogSearchForm()
+    return render(request, "assets/list_modlog.html", locals())
 

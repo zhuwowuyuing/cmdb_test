@@ -1,0 +1,131 @@
+{##}
+{% extends "base.html" %}
+
+{% block title %} <h1> Device </h1><h2> Search </h2> {% endblock %}
+
+{#{% block heading %}#}
+{#    <h1> Device</h1>#}
+{#    <h2> Search Records</h2>#}
+{#{% endblock %}#}
+
+{% block content %}
+    <div class="row-fluid">
+        <div class="block">
+            <p class="block-heading">Search Assets</p>
+            <div class="block-body">
+                <table class="table">
+                <form action="" method="get">
+                        {{ modlogform }}
+                        <input class="btn btn-primary" type="submit" value="提交查询"></input>
+                </form>
+                    </table>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="block">
+            <p class="block-heading">Assets List</p>
+            <div class="block-body">
+                {% if list_items %}
+                    {#                    <div class="well">#}
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>类型</th>
+                            <th>资产编号</th>
+                            <th>修改时间</th>
+                            <th>修改人</th>
+                            <th>字段名称</th>
+                            <th>旧值</th>
+                            <th>新值</th>
+                            <th>备注</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in list_items.object_list %}
+                            <tr>
+                                <td>  {{item.id}}</td>
+                                <td>  {{item.typename}}</td>
+                                <td>  {{item.asset}}</td>
+                                <td>  {{item.mtime}}</td>
+                                <td>  {{item.moduser}}</td>
+                                <td>  {{item.field}}</td>
+                                <td>  {{item.oldvalue}}</td>
+                                <td>  {{item.newvalue}}</td>
+                                <td>  {{item.comment}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    </table>
+
+                    <div align="center">
+{#                        {% if list_items.has_previous %}#}
+                            {#                        <a href="?asset={{ asset }}&asset_old={{ asset_old }}&type={{ type }}&subtype={{ subtype }}&manufacturer={{ manufacturer }}&model={{ model }}&building={{ building }}&location={{ location }}&consignee={{ consignee }}&hostname={{ hostname }}&vendor={{ vendor }}&page={{ list_items.previous_page_number }}">Previous</a>#}
+{#                            {% if status == None %}#}
+{#                                <a href="?asset={{ asset }}&asset_old={{ asset_old }}&type={{ type }}&subtype={{ subtype }}&manufacturer={{ manufacturer }}&model={{ model }}&building={{ building }}&location={{ location }}&consignee={{ consignee }}&hostname={{ hostname }}&vendor={{ vendor }}&page={{ list_items.previous_page_number }}">Previous</a>#}
+{#                            {% else %}#}
+{#                                <a href="?asset={{ asset }}&asset_old={{ asset_old }}&type={{ type }}&subtype={{ subtype }}&manufacturer={{ manufacturer }}&model={{ model }}&building={{ building }}&location={{ location }}&consignee={{ consignee }}&hostname={{ hostname }}&vendor={{ vendor }}&status={{ status }}&page={{ list_items.previous_page_number }}">Previous</a>#}
+{#                            {% endif %}#}
+{#                        {% endif %}#}
+{##}
+{#                        <span class="current">#}
+{#                            Page {{ list_items.number }} of {{ list_items.paginator.num_pages }}.#}
+{#                        </span>#}
+{##}
+{#                        {% if list_items.has_next %}#}
+{#                            {% if status == None %}#}
+{#                                <a href="?asset={{ asset }}&asset_old={{ asset_old }}&type={{ type }}&subtype={{ subtype }}&manufacturer={{ manufacturer }}&model={{ model }}&building={{ building }}&location={{ location }}&consignee={{ consignee }}&hostname={{ hostname }}&vendor={{ vendor }}&page={{ list_items.next_page_number }}">Next</a>#}
+{#                            {% else %}#}
+{#                                <a href="?asset={{ asset }}&asset_old={{ asset_old }}&type={{ type }}&subtype={{ subtype }}&manufacturer={{ manufacturer }}&model={{ model }}&building={{ building }}&location={{ location }}&consignee={{ consignee }}&hostname={{ hostname }}&vendor={{ vendor }}&status={{ status }}&page={{ list_items.next_page_number }}">Next</a>#}
+{#                            {% endif %}#}
+{#                        {% endif %}#}
+
+                        <span><p>Total:{{ count }}</p></span>
+                    </div>
+                {% else %}
+                    <div align="center">
+                        <strong>No Such Data</strong>
+                    </div>
+                {% endif %}
+        </div>
+    </div>
+
+    {#        <div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">#}
+    {#            <div class="modal-header">#}
+    {#                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>#}
+    {#                <h3 id="myModalLabel">Delete Confirmation</h3>#}
+    {#            </div>#}
+    {##}
+    {#            <div class="modal-body">#}
+    {##}
+    {#                <p class="error-text"><i class="icon-warning-sign modal-icon"></i>Are you sure you want to delete the user?</p>#}
+    {#            </div>#}
+    {##}
+    {#            <div class="modal-footer">#}
+    {#                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>#}
+    {#                <button class="btn btn-danger" data-dismiss="modal">Delete</button>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
+    {##}
+    {#    <div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">#}
+    {#        <div class="modal-header">#}
+    {#            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>#}
+    {#            <h3 id="myModalLabel">Delete Confirmation</h3>#}
+    {#        </div>#}
+    {##}
+    {#        <div class="modal-body">#}
+    {##}
+    {#            <p class="error-text"><i class="icon-warning-sign modal-icon"></i>Are you sure you want to delete the record?</p>#}
+    {#        </div>#}
+    {##}
+    {#        <div class="modal-footer">#}
+    {#            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>#}
+    {#            <button class="btn btn-danger" data-dismiss="modal"><a href="{% url "assets.views.delete_servers" item.asset %}"> Delete </a></button>#}
+    {#            <a href="{% url "assets.views.delete_servers" item.asset %}" class="btn btn-danger" data-dismiss="modal">Delete</a>#}
+    {#        </div>#}
+    {#    </div>#}
+{% endblock %}

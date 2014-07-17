@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'status/create/$', 'assets.views.create_status'),
     url(r'status/list/$', 'assets.views.list_status'),
     url(r'status/edit/(?P<status>[^/]+)/$', 'assets.views.edit_status'),
+    url(r'modlog/list/$', 'assets.views.list_modlog'),
 )
 
 #

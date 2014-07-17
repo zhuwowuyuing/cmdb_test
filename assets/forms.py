@@ -169,3 +169,12 @@ class ChangepwdForm(forms.Form):
         else:
             cleaned_data = super(ChangepwdForm, self).clean()
         return cleaned_data
+
+class ModLogSearchForm(forms.Form):
+    typename        =forms.CharField(label="类型", max_length=60, required=False)
+    asset           =forms.CharField(label='资产编号', max_length=60, required=False)
+    moduser         =forms.CharField(label='修改人', max_length=60, required=False)
+    field           =forms.CharField(label='字段名称',max_length=60, required=False)
+    comment         =forms.CharField(label='备注',max_length=500, required=False)
+    beforemtime     =forms.DateTimeField(label="修改于之前", required=False)
+    aftermtime      =forms.DateTimeField(label="修改于之后", required=False)
