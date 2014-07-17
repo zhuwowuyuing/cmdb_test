@@ -56,6 +56,30 @@ def logout(request):
     auth.logout(request)
     return HttpResponseRedirect("/login/")
 
+@login_required
+def chgpwd(request):
+    page_title="修改密码"
+    if request.method == 'GET':
+        form = ChangepwdForm()
+        return render_to_response('chgpwd.html', RequestContext(request, locals()))
+    else:
+        form = ChangepwdForm(request.POST)
+        if form.is_valid():
+            username = request.user.username
+            oldpassword = request.POST.get('oldpassword', '')
+            user = auth.authenticate(username=username, password=oldpassword)
+            if user is not None and user.is_active:
+                newpassword = request.POST.get('newpassword1', '')
+                user.set_password(newpassword)
+                user.save()
+                changepwd_success=True
+                return render_to_response('index.html', RequestContext(request,locals()))
+            else:
+                oldpassword_is_wrong=True
+                return render_to_response('chgpwd.html', RequestContext(request, locals()))
+        else:
+            return render_to_response('chgpwd.html', RequestContext(request, locals()))
+
 
 @login_required
 def index(request):
@@ -71,13 +95,18 @@ def create_servers(request):
     form = ServersForm(request.POST or None)
     if form.is_valid():
         form.save()
-        form = ServersForm()
+        asset= form.data.get("asset")
+        url = "/assets/servers/edit/%s"%(asset)
+        return HttpResponseRedirect(url)
 
     t = get_template('assets/create_servers.html')
     c = RequestContext(request,locals())
     return HttpResponse(t.render(c))
 
-
+    #
+    # asset= form.cleaned_data[asset]
+    # url = "assets/servers/edit/%s"%(asset)
+    # return HttpResponseRedirect(url)
 
 def list_servers(request):
     page_title='服务器列表'

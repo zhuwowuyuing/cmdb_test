@@ -115,26 +115,24 @@
     <div class="navbar-inner">
         <ul class="nav pull-right">
 
-{#            <li><a href="#" class="hidden-phone visible-tablet visible-desktop" role="button">Settings</a></li>#}
-            <li id="fat-menu" class="dropdown">
-                {% if user.is_authenticated %}
-                <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="icon-user"></i>
-{#                    {% if user.is_authenticated %}#}
-                    {{ user.username }}
-{#                    {% endif %}#}
-                    <i class="icon-caret-down"></i>
-                </a>
-                 {% endif %}
+            {% if user.is_authenticated %}
+                <li id="fat-menu" class="dropdown">
 
-                <ul class="dropdown-menu">
-{#                    <li><a tabindex="-1" href="#">My Account</a></li>#}
-{#                    <li class="divider"></li>#}
-{#                    <li><a tabindex="-1" class="visible-phone" href="#">Settings</a></li>#}
-{#                    <li class="divider visible-phone"></li>#}
-                    <li><a tabindex="-1" href="{% url "assets.views.logout" %}">Logout</a></li>
-                </ul>
-            </li>
+                    <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon-user"></i>
+                        {{ user.username }}
+                        <i class="icon-caret-down"></i>
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        <li><a tabindex="-1" href="{% url "assets.views.chgpwd" %}">修改密码</a></li>
+                        <li class="divider"></li>
+{#                        <li><a tabindex="-1" class="visible-phone" href="#">Settings</a></li>#}
+{#                        <li class="divider visible-phone"></li>#}
+                        <li><a tabindex="-1" href="{% url "assets.views.logout" %}">Logout</a></li>
+                    </ul>
+                </li>
+            {% endif %}
 
         </ul>
         <a class="brand" href="/index.html/">
@@ -180,13 +178,13 @@
 
     <div class="container-fluid">
         <div class="row-fluid">
-{#            <div class="row-fluid">#}
+            {#            <div class="row-fluid">#}
             <div id="summary">
                 {% block heading %}
                 {% endblock %}
             </div>
 
-{#            <div class="row-fluid">#}
+            {#            <div class="row-fluid">#}
             <div id="content">
                 {% block content %}
                 {% endblock %}

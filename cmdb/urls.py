@@ -25,5 +25,6 @@ urlpatterns += patterns ('',
     url(r'^$', 'assets.views.login'),
     url(r'^login/$', 'assets.views.login'),
     url(r'^logout/$', 'assets.views.logout'),
+    url(r'^chgpwd/$', 'assets.views.chgpwd'),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
 )

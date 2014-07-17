@@ -1,4 +1,4 @@
-
+{##}
 {% extends "base.html" %}
 
 {% block title %} <h1> Device </h1><h2> Search </h2> {% endblock %}
@@ -92,15 +92,51 @@
                                 <td>  {{item.consignee}}</td>
                                 <td>  {{item.hostname}}</td>
                                 <td>  {{item.vendor}}</td>
-                                <td><a href="{% url "assets.views.view_servers" item.asset %}">Show</a> </td>
-                                <td><a href="{% url "assets.views.edit_servers" item.asset %}">Edit</a></td>
+                                <td><a href="{% url "assets.views.view_servers" item.asset %}" >Show</a> </td>
+                                <td><a href="{% url "assets.views.edit_servers" item.asset %}" >Edit</a></td>
                                 <td><a href="{% url "assets.views.delete_servers" item.asset %}">Delete</a></td>
 {#                                <td><a href="#myModal" data-toggle="modal" class="btn">Delete</a></td>#}
+{##}
+{#                                <div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">#}
+{#                                    <div class="modal-header">#}
+{#                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>#}
+{#                                         <h3 id="myModalLabel">Delete Confirmation</h3>#}
+{#                                    </div>#}
+{##}
+{#                                    <div class="modal-body">#}
+{#                                        <p class="error-text"><i class="icon-warning-sign modal-icon"></i>Are you sure you want to delete the user?</p>#}
+{#                                    </div>#}
+{##}
+{#                                    <div class="modal-footer">#}
+{#                                        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>#}
+{#                                        <button class="btn btn-danger" data-dismiss="modal"><a href="{% url "assets.views.delete_servers" item.asset %}">Delete</a></button>#}
+{#                                    </div>#}
+{#                                </div>#}
+{##}
+{##}
+{#                                <div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">#}
+{#                                    <div class="modal-header">#}
+{#                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>#}
+{#                                        <h3 id="myModalLabel">Delete Confirmation</h3>#}
+{#                                    </div>#}
+{##}
+{#                                    <div class="modal-body">#}
+{##}
+{#                                        <p class="error-text"><i class="icon-warning-sign modal-icon"></i>Are you sure you want to delete the record?</p>#}
+{#                                    </div>#}
+{##}
+{#                                    <div class="modal-footer">#}
+{#                                        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>#}
+{#                                        <button class="btn btn-danger" data-dismiss="modal"><a href="{% url "assets.views.delete_servers" item.asset %}"> Delete </a></button>#}
+{#                                        <a href="{% url "assets.views.delete_servers" item.asset %}" class="btn btn-danger" data-dismiss="modal">Delete</a>#}
+{#                                    </div>#}
+{#                                </div>#}
+
                             </tr>
                         {% endfor %}
-                        <tr><td colspan="3"> <a href="{% url "assets.views.create_servers" %}">Add New</a></td></tr>
-                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                        </tbody>
+                    <tr><td colspan="3"> <a href="{% url "assets.views.create_servers" %}">Add New</a></td></tr>
+                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    </tbody>
                     </table>
 
                     <div align="center">
@@ -132,24 +168,42 @@
                         <strong>No Such Data</strong>
                     </div>
                 {% endif %}
-            </div>
-        </div>
-        <div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 id="myModalLabel">Delete Confirmation</h3>
-            </div>
-
-            <div class="modal-body">
-
-                <p class="error-text"><i class="icon-warning-sign modal-icon"></i>Are you sure you want to delete the user?</p>
-            </div>
-
-            <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-                <button class="btn btn-danger" data-dismiss="modal">Delete</button>
-            </div>
         </div>
     </div>
 
+    {#        <div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">#}
+    {#            <div class="modal-header">#}
+    {#                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>#}
+    {#                <h3 id="myModalLabel">Delete Confirmation</h3>#}
+    {#            </div>#}
+    {##}
+    {#            <div class="modal-body">#}
+    {##}
+    {#                <p class="error-text"><i class="icon-warning-sign modal-icon"></i>Are you sure you want to delete the user?</p>#}
+    {#            </div>#}
+    {##}
+    {#            <div class="modal-footer">#}
+    {#                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>#}
+    {#                <button class="btn btn-danger" data-dismiss="modal">Delete</button>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
+    {##}
+    {#    <div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">#}
+    {#        <div class="modal-header">#}
+    {#            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>#}
+    {#            <h3 id="myModalLabel">Delete Confirmation</h3>#}
+    {#        </div>#}
+    {##}
+    {#        <div class="modal-body">#}
+    {##}
+    {#            <p class="error-text"><i class="icon-warning-sign modal-icon"></i>Are you sure you want to delete the record?</p>#}
+    {#        </div>#}
+    {##}
+    {#        <div class="modal-footer">#}
+    {#            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>#}
+    {#            <button class="btn btn-danger" data-dismiss="modal"><a href="{% url "assets.views.delete_servers" item.asset %}"> Delete </a></button>#}
+    {#            <a href="{% url "assets.views.delete_servers" item.asset %}" class="btn btn-danger" data-dismiss="modal">Delete</a>#}
+    {#        </div>#}
+    {#    </div>#}
 {% endblock %}

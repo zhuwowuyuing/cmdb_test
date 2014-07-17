@@ -10,39 +10,11 @@
 {#{% endblock %}#}
 
 {% block content %}
-    <p><strong>CMDB</strong></p>
-{#    <div class="row-fluid">#}
-{#        <div class="block">#}
-{#            <div class="block-body">#}
-{#                <div class="well">#}
-{#                    <table class="table">#}
-{#                        <thead>#}
-{#                        <tr>#}
-{#                            <th>#</th>#}
-{#                            <th>状态</th>#}
-{#                            <th>数量</th>#}
-{#                        </tr>#}
-{#                        </thead>#}
-{#                        <tbody>#}
-{#                        {% for item in modelCount %}#}
-{#                            <tr>#}
-{#                                <td>{{forloop.counter}}</td>#}
-{#                                {% for key, value in item.items %}#}
-{#                                    {% if key == 'model' %}#}
-{#                                        <td><a href="/assets/servers/search/?model={{ value }}">{{ value }}</a></td>#}
-{#                                    {% else %}#}
-{#                                        <td>{{ value }}</td>#}
-{#                                    {% endif %}#}
-{#                                {% endfor %}#}
-{#                            </tr>#}
-{#                        {% endfor %}#}
-{#                        </tbody>#}
-{#                    </table>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#        <div>#}
-{##}
-{#        </div>#}
-{#    </div>#}
+{#    <p><strong>CMDB</strong></p>#}
+    {% if changepwd_success %}
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <h4>修改用户密码成功！</h4>
+        </div>
+    {% endif %}
 {% endblock %}
