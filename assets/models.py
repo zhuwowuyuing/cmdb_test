@@ -162,7 +162,7 @@ class ModLog(models.Model):
     typename        = models.CharField('表名', max_length=60)
     asset           = models.CharField('资产编号', max_length=60)
     mtime           = models.DateTimeField('修改时间')
-    moduser           = models.CharField('修改人', max_length=60)
+    moduser         = models.CharField('修改人', max_length=60)
     field           = models.CharField('字段名称', max_length=100)
     oldvalue        = models.CharField('旧值', max_length=500, blank = True)
     newvalue        = models.CharField('新值', max_length=500, blank = True)

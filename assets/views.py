@@ -362,16 +362,18 @@ def list_modlog(request):
             moduser = data.get('moduser','')
             field = data.get('field','')
             comment = data.get('comment','')
-            beforemtime = data.get('beforemtime', "2014-09-30 00:00:00")
-            aftermtime = data.get('aftermtime', 'None')
+            starttime = data.get('starttime')
+            endtime = data.get('endtime')
+            if endtime == None:
+                endtime = datetime.now()
 
-            if aftermtime ==  None or aftermtime == 'None':
+            if starttime ==  None or starttime == 'None':
                 list_items = ModLog.objects.filter(typename__icontains = typename,
                                                     asset__icontains = asset,
                                                     moduser__icontains = moduser,
                                                     field__icontains = field,
                                                     comment__icontains = comment,
-                                                    # mtime__lte = beforemtime
+                                                    mtime__lte=endtime
                                                     )
             else:
                 list_items = ModLog.objects.filter(typename__icontains = typename,
@@ -379,9 +381,7 @@ def list_modlog(request):
                                                     moduser__icontains = moduser,
                                                     field__icontains = field,
                                                     comment__icontains = comment,
-                                                    mtime__range=(aftermtime, beforemtime)
-                                                    # mtime__lte = beforemtime,
-                                                    # mtime__gte = aftermtime
+                                                    mtime__range=(starttime, endtime)
                                                     )
             count = list_items.count()
             paginator = Paginator(list_items ,15)
