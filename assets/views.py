@@ -23,7 +23,6 @@ from django.shortcuts import render_to_response,render,get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib import auth
-from django.contrib import messages
 from django.template.context import RequestContext
 
 from django.forms.formsets import formset_factory
@@ -96,9 +95,8 @@ def create_servers(request):
     if form.is_valid():
         form.save()
         asset= form.data.get("asset")
-        log = ModLog(typename=str(type(servers_instance)),asset=servers_instance.asset, mtime= datetime.now(),
-                             field=servers_instance._meta.get_field("asset").verbose_name,
-                             oldvalue=old_instance.__dict__[filed], newvalue=form.data.get(filed,''), moduser=request.user)
+        log = ModLog(typename="Servers",asset=asset, mtime= datetime.now(),
+                              moduser=request.user, comment="新增服务器")
         log.save()
         url = "/assets/servers/edit/%s"%(asset)
         return HttpResponseRedirect(url)
@@ -145,7 +143,7 @@ def view_servers(request, asset):
         else:
             form.fields[field].widget.attrs['disabled'] = True
 
-    list_log = ModLog.objects.filter(asset = asset, typename=str(type(servers_instance))).order_by('-mtime')
+    list_log = ModLog.objects.filter(asset = asset, typename="Servers").order_by('-mtime')
     t=get_template('assets/view_servers.html')
     c=RequestContext(request,locals())
     return HttpResponse(t.render(c))
@@ -157,12 +155,12 @@ def edit_servers(request, asset):
 
     old_instance = copy.deepcopy(servers_instance)
     form = ServersForm(request.POST or None, instance = servers_instance)
-    list_log = ModLog.objects.filter(asset = asset, typename=str(type(servers_instance))).order_by('-mtime')
+    list_log = ModLog.objects.filter(asset = asset, typename="Servers").order_by('-mtime')
 
     if form.is_valid():
         if form.has_changed():
             for filed in form.changed_data:
-                log = ModLog(typename=str(type(servers_instance)),asset=servers_instance.asset, mtime= datetime.now(),
+                log = ModLog(typename="Servers",asset=servers_instance.asset, mtime= datetime.now(),
                              field=servers_instance._meta.get_field(filed).verbose_name,
                              oldvalue=old_instance.__dict__[filed], newvalue=form.data.get(filed,''), moduser=request.user)
                 log.save()
@@ -176,11 +174,14 @@ def edit_servers(request, asset):
 @login_required
 def delete_servers(request, asset):
     Servers.objects.get(asset = asset).delete()
+    log = ModLog(typename="Servers",asset=asset, mtime= datetime.now(),
+                              moduser=request.user, comment="删除服务器")
+    log.save()
     searchform = ServersSearchForm()
     return HttpResponseRedirect("/assets/servers/search/",locals())
-    # return render(request, "assets/search_servers.html", locals())
 
 
+@login_required
 def search_servers(request):
     page_title='搜索服务器'
     if request.method == "GET":
@@ -245,7 +246,7 @@ def search_servers(request):
         searchform = ServersSearchForm()
     return render(request, "assets/search_servers.html", locals())
 
-
+@login_required
 def statistic_servers(request):
     page_title='概述报表'
     modelCount=Servers.objects.values('model').annotate(dcount=Count('model')).order_by('model')
@@ -278,6 +279,7 @@ def statistic_servers(request):
 
     return render(request, "assets/statistic_servers.html", locals())
 
+@login_required
 def groupbymodel_servers(request):
     page_title='按型号统计'
     modelCount=Servers.objects.values('model').annotate(dcount=Count('model')).order_by('model')
@@ -289,6 +291,7 @@ def groupbymodel_servers(request):
     results=sorted(results.items())
     return render(request, "assets/groupbymodel_servers.html", locals())
 
+@login_required
 def groupbystatus_servers(request):
     page_title='按使用状态统计'
     # modelCount=Servers.objects.values('status').annotate(dcount=Count('status')).order_by('status')
@@ -310,7 +313,7 @@ def create_status(request):
     c = RequestContext(request,locals())
     return HttpResponse(t.render(c))
 
-
+@login_required
 def list_status(request):
     page_title='使用状态列表'
     list_items = Status.objects.all()
@@ -349,7 +352,7 @@ def edit_status(request, status):
     c=RequestContext(request,locals())
     return HttpResponse(t.render(c))
 
-
+@login_required
 def list_modlog(request):
     page_title='修改历史'
     if request.method == "GET":
@@ -384,7 +387,7 @@ def list_modlog(request):
                                                     mtime__range=(starttime, endtime)
                                                     )
             count = list_items.count()
-            paginator = Paginator(list_items ,15)
+            paginator = Paginator(list_items ,3)
 
             try:
                 page = int(request.GET.get('page', '1'))

@@ -63,12 +63,12 @@
 
                     <div align="center">
                         {% if list_items.has_previous %}
-                                                    <a href="?typename={{ modlogform.typename }}&asset={{ modlogform.asset }}&moduser={{ modlogform.moduser }}&comment={{ modlogform.comment }}&starttime={{ modlogform.starttime }}&endtime={{ modlogform.endtime }}&page={{ list_items.previous_page_number }}">Previous</a>
-                            {% if status == None %}
-                                <a href="?typename={{ modlogform.typename }}&asset={{ modlogform.asset }}&moduser={{ modlogform.moduser }}&comment={{ modlogform.comment }}&starttime={{ modlogform.starttime }}&endtime={{ modlogform.endtime }}&page={{ list_items.previous_page_number }}">Previous</a>
-                            {% else %}
-                                <a href="?typename={{ modlogform.typename }}&asset={{ modlogform.asset }}&moduser={{ modlogform.moduser }}&comment={{ modlogform.comment }}&starttime={{ modlogform.starttime }}&endtime={{ modlogform.endtime }}&page={{ list_items.previous_page_number }}">Previous</a>
-                            {% endif %}
+                            <a href="?typename={{ list_items.typename }}&asset={{ list_items.asset }}&moduser={{ list_items.moduser }}&comment={{ list_items.comment }}&starttime={{ list_items.starttime }}&endtime={{ list_items.endtime }}&page={{ list_items.previous_page_number }}">Previous</a>
+{#                            {% if status == None %}#}
+{#                                <a href="?typename={{ modlogform.typename }}&asset={{ modlogform.asset }}&moduser={{ modlogform.moduser }}&comment={{ modlogform.comment }}&starttime={{ modlogform.starttime }}&endtime={{ modlogform.endtime }}&page={{ list_items.previous_page_number }}">Previous</a>#}
+{#                            {% else %}#}
+{#                                <a href="?typename={{ modlogform.typename }}&asset={{ modlogform.asset }}&moduser={{ modlogform.moduser }}&comment={{ modlogform.comment }}&starttime={{ modlogform.starttime }}&endtime={{ modlogform.endtime }}&page={{ list_items.previous_page_number }}">Previous</a>#}
+{#                            {% endif %}#}
                         {% endif %}
 
                         <span class="current">
@@ -76,11 +76,7 @@
                         </span>
 
                         {% if list_items.has_next %}
-                            {% if status == None %}
-                                <a href="?typename={{ modlogform.typename }}&asset={{ modlogform.asset }}&moduser={{ modlogform.moduser }}&comment={{ modlogform.comment }}&starttime={{ modlogform.starttime }}&endtime={{ modlogform.endtime }}&page={{ list_items.next_page_number }}">Next</a>
-                            {% else %}
-                                <a href="?typename={{ modlogform.typename }}&asset={{ modlogform.asset }}&moduser={{ modlogform.moduser }}&comment={{ modlogform.comment }}&starttime={{ modlogform.starttime }}&endtime={{ modlogform.endtime }}&page={{ list_items.next_page_number }}">Next</a>
-                            {% endif %}
+                                <a href="?typename={{ list_items.typename }}&asset={{ list_items.asset }}&moduser={{ list_items.moduser }}&comment={{ list_items.comment }}&starttime={{ list_items.starttime }}&endtime={{ list_items.endtime }}&page={{ list_items.next_page_number }}">Next</a>
                         {% endif %}
 
                         <span><p>Total:{{ count }}</p></span>
